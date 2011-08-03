@@ -5,8 +5,8 @@ Description: Sitewide Activity Widget for Buddypress 1.2+
 Author:Brajesh Singh
 Author URI: http://buddydev.com
 Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
-Version: 1.1.3.1
-Last Updated: May 08, 2011
+Version: 1.1.3.2
+Last Updated: August 02, 2011
 */
  $bp_swa_dir =str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
  define("BP_SWA_DIR_NAME",$bp_swa_dir);//the directory name of swa widget

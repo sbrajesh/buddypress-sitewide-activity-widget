@@ -81,14 +81,14 @@ j(".widget_bp_swa_widget #activity-filter-links li a").live("click",function(){
                              
 		form.children().each( function() {
 			if ( j.nodeName(this, "textarea") || j.nodeName(this, "input") )
-				j(this).attr( 'disabled', 'disabled' );
+				j(this).prop( 'disabled', 'disabled' );
 		});
                 //disabled
 		j( 'form#' + form.attr('id') + ' span.ajax-loader' ,parent).show();
 
 		/* Remove any errors */
 		j('div.error',parent).remove();
-		button.attr('disabled','disabled');
+		button.prop('disabled','disabled');
 
 		/* Default POST values */
 		var object = '';
@@ -115,14 +115,14 @@ j(".widget_bp_swa_widget #activity-filter-links li a").live("click",function(){
 
 			form.children().each( function() {
 				if ( j.nodeName(this, "textarea") || j.nodeName(this, "input") )
-					j(this).attr( 'disabled', '' );
+					j(this).prop( 'disabled', '' );
 			});
 
 			/* Check for errors and append if found. */
 			if ( response[0] + response[1] == '-1' ) {
 				form.prepend( response.substr( 2, response.length ) );
 				j( 'form#' + form.attr('id') + ' div.error',parent).hide().fadeIn( 200 );
-				button.attr("disabled", '');
+				button.prop("disabled", '');
 			} else {
 				if ( 0 == j("ul.swa-activity-list",parent).length ) {
 					j("div.error",parent).slideUp(100).remove();
@@ -137,7 +137,7 @@ j(".widget_bp_swa_widget #activity-filter-links li a").live("click",function(){
 				j("textarea#swa-whats-new",parent).val('');
 
 				/* Re-enable the submit button after 8 seconds. */
-				setTimeout( function() { button.attr("disabled", ''); }, 8000 );
+				setTimeout( function() { button.prop("disabled", ''); }, 8000 );
 			}
 		});
 
@@ -224,7 +224,7 @@ j(".widget_bp_swa_widget #activity-filter-links li a").live("click",function(){
 				/* Check for errors and append if found. */
 				if ( response[0] + response[1] == '-1' ) {
 					form.append( response.substr( 2, response.length ) ).hide().fadeIn( 200 );
-					target.attr("disabled", '');
+					target.prop("disabled", '');
 				} else {
 					form.fadeOut( 200,
 						function() {
@@ -246,7 +246,7 @@ j(".widget_bp_swa_widget #activity-filter-links li a").live("click",function(){
 					jq('li#activity-' + form_id[2] + ' a.acomment-reply span').html( Number( jq('li#activity-' + form_id[2] + ' a.acomment-reply span').html() ) + 1 );
 
 					/* Re-enable the submit button after 5 seconds. */
-					setTimeout( function() { target.attr("disabled", ''); }, 5000 );
+					setTimeout( function() { target.prop("disabled", ''); }, 5000 );
 				}
 			});
 
