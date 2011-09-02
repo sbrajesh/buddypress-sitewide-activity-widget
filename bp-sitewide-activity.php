@@ -212,7 +212,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 	function swa_get_activity_filter_links( $args = false ) {
 		global $activities_template, $bp;
                 
-                $selected=false;
+              
                 $link='';
 		$defaults = array(
 			'style' => 'list'
@@ -226,7 +226,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
                  
                 if ( !$components )
 			return false;
-
+                 
 		foreach ( (array) $components as $component ) {
 			/* Skip the activity comment filter */
 			if ( 'activity' == $component )
@@ -235,7 +235,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 			if ( isset( $_GET['afilter'] ) && $component == $_GET['afilter'] )
 				$selected = ' class="selected"';
 			else
-				unset($selected);
+				$selected='';
 
 			$component = esc_attr( $component );
 
