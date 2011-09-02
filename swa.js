@@ -185,7 +185,7 @@ j(".widget_bp_swa_widget #activity-filter-links li a").live("click",function(){
 				form.addClass('root');
 
 			form.slideDown( 200 );
-			jq.scrollTo( form, 500, { offset:-100, easing:'easeout' } );
+			jq.scrollTo( form, 500, { offset:-100, easing:'easeOutQuad' } );
 			jq('#swa-ac-form-' + ids[2] + ' textarea').focus();
 
 			return false;
