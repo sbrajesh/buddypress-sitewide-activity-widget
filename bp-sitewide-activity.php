@@ -211,6 +211,8 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 }
 	function swa_get_activity_filter_links( $args = false ) {
 		global $activities_template, $bp;
+                
+                $selected=false;
                 $link='';
 		$defaults = array(
 			'style' => 'list'
@@ -400,7 +402,7 @@ function bp_swa_list_activities($per_page=10,$page=1,$scope='',$max=200,$show_av
         $user_id=$bp->loggedin_user->id;
     else if($is_blog_admin_activity=="yes")
         $user_id=swa_get_blog_admin_id();
-    else if(bp_is_member ())
+    else if(bp_is_user())
         $user_id=null;
     
     $components_scope=swa_get_base_component_scope($included,$excluded);
