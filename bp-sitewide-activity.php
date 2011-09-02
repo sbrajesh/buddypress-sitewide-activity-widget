@@ -5,8 +5,8 @@ Description: Sitewide Activity Widget for Buddypress 1.2+
 Author:Brajesh Singh
 Author URI: http://buddydev.com
 Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
-Version: 1.1.3.2
-Last Updated: August 02, 2011
+Version: 1.1.3.3
+Last Updated: September 01, 2011
 */
  $bp_swa_dir =str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
  define("BP_SWA_DIR_NAME",$bp_swa_dir);//the directory name of swa widget
@@ -130,9 +130,9 @@ class BP_SWA_Widget extends WP_Widget {
               
 		?>
 
-                <p><label for="bp-swa-title"><strong><?php _e('Title:', 'swa'); ?> </strong><input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo attribute_escape( $title ); ?>" style="width: 100%" /></label></p>
-		<p><label for="bp-swa-per-page"><?php _e('Number of Items Per Page:', 'swa'); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'per_page' ); ?>" name="<?php echo $this->get_field_name( 'per_page' ); ?>" type="text" value="<?php echo attribute_escape( $per_page ); ?>" style="width: 30%" /></label></p>
-		<p><label for="bp-swa-max"><?php _e('Max items to show:', 'swa'); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'max_items' ); ?>" name="<?php echo $this->get_field_name( 'max_items' ); ?>" type="text" value="<?php echo attribute_escape( $max_items ); ?>" style="width: 30%" /></label></p>
+                <p><label for="bp-swa-title"><strong><?php _e('Title:', 'swa'); ?> </strong><input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" style="width: 100%" /></label></p>
+		<p><label for="bp-swa-per-page"><?php _e('Number of Items Per Page:', 'swa'); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'per_page' ); ?>" name="<?php echo $this->get_field_name( 'per_page' ); ?>" type="text" value="<?php echo esc_attr( $per_page ); ?>" style="width: 30%" /></label></p>
+		<p><label for="bp-swa-max"><?php _e('Max items to show:', 'swa'); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'max_items' ); ?>" name="<?php echo $this->get_field_name( 'max_items' ); ?>" type="text" value="<?php echo esc_attr( $max_items ); ?>" style="width: 30%" /></label></p>
 		 <p><label for="bp-swa-is-personal"><strong><?php _e("Limit to Logged In user's activity:", 'swa'); ?></strong>
                        <label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php if($is_personal=='yes') echo "checked='checked'";?> value="yes" style="width: 10%" />Yes</label>
                        <label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'is_personal' ); ?>_no" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php if($is_personal!=='yes') echo "checked='checked'";?> value="no" style="width: 10%" />No</label>
@@ -199,7 +199,7 @@ function swa_register_widgets(){
     add_action('widgets_init', create_function('', 'return register_widget("BP_SWA_Widget");') );
 }
 //register the widget
-add_action( 'bp_init', 'swa_register_widgets' );
+add_action( 'bp_loaded', 'swa_register_widgets' );
 
 
 
@@ -235,7 +235,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 			else
 				unset($selected);
 
-			$component = attribute_escape( $component );
+			$component = esc_attr( $component );
 
 			switch ( $style ) {
 				case 'list':
@@ -263,7 +263,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 			/* Make sure all core internal component names are translatable */
 			$translatable_components = array( __( 'profile', 'swa'), __( 'friends', 'swa' ), __( 'groups', 'swa' ), __( 'status', 'swa' ), __( 'blogs', 'swa' ) );
 
-			$component_links[] = $before . '<a href="' . attribute_escape( $link ) . '">' . ucwords( __( $component, 'swa' ) ) . '</a>' . $after;
+			$component_links[] = $before . '<a href="' . esc_attr( $link ) . '">' . ucwords( __( $component, 'swa' ) ) . '</a>' . $after;
 		}
 
 		$link = remove_query_arg( 'afilter' , $link );
@@ -272,7 +272,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
                  
                      if ( !empty( $_REQUEST['scope'] ) ){
                         $link .= "?afilter=";
-        			$component_links[] = '<' . $tag . ' id="afilter-clear"><a href="' . attribute_escape( $link ) . '"">' . __( 'Clear Filter', 'swa' ) . '</a></' . $tag . '>';
+        			$component_links[] = '<' . $tag . ' id="afilter-clear"><a href="' . esc_attr( $link ) . '"">' . __( 'Clear Filter', 'swa' ) . '</a></' . $tag . '>';
                      }
 
                      if(!empty($component_links))
