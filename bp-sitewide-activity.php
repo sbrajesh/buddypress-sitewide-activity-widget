@@ -5,8 +5,8 @@ Description: Sitewide Activity Widget for Buddypress 1.2+
 Author:Brajesh Singh
 Author URI: http://buddydev.com
 Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
-Version: 1.1.3.3
-Last Updated: September 01, 2011
+Version: 1.1.3.4
+Last Updated: October 27, 2011
 */
  $bp_swa_dir =str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
  define("BP_SWA_DIR_NAME",$bp_swa_dir);//the directory name of swa widget
@@ -345,14 +345,8 @@ function swa_activity_entry($show_avatar=false){
 	<div class="swa-activity-meta">
             <?php if ( is_user_logged_in() && bp_activity_can_comment() ) : ?>
 				<a href="<?php bp_activity_comment_link() ?>" class="acomment-reply" id="acomment-comment-<?php bp_activity_id() ?>"><?php _e( 'Reply', 'buddypress' ) ?> (<span><?php bp_activity_comment_count() ?></span>)</a>
-			<?php endif; ?>
-            <?php if ( is_user_logged_in() ) : ?>
-		<?php if ( !bp_get_activity_is_favorite() ) : ?>
-                    <a href="<?php bp_activity_favorite_link() ?>" class="fav" title="<?php _e( 'Mark as Favorite', 'swa' ) ?>"><?php _e( 'Favorite', 'swa' ) ?></a>
-		<?php else : ?>
-                    <a href="<?php bp_activity_unfavorite_link() ?>" class="unfav" title="<?php _e( 'Remove Favorite', 'swa' ) ?>"><?php _e( 'Remove Favorite', 'swa' ) ?></a>
-		<?php endif; ?>
-            <?php endif;?>
+            <?php endif; ?>
+           
             <?php do_action( 'bp_activity_entry_meta' ) ?>
         </div>
 	<div class="clear" ></div>
