@@ -1,0 +1,9 @@
+.swa-widgte-block{
+    background:#FFFFFF;
+    border: 1px solid #EEEEEE;
+    margin-top: 10px;
+    padding: 5px;
+}
+.swa-widgte-block p{}
+.swa-widgte-block p label{}
+.swa-widgte-block p input{}
