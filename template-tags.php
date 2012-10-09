@@ -41,7 +41,7 @@ function bp_swa_list_activities($per_page=10,$page=1,$scope='',$max=200,$show_av
 			</ul>
           <div class="clear"></div>
                     <?php endif;?>
-        <?php echo  'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id;
+        <?php //echo  'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id;
  	if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id ) ) : ?>
 
             <div class="swa-pagination ">
