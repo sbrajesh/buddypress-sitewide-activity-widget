@@ -5,8 +5,8 @@ Description: Sitewide Activity Widget for Buddypress 1.6+
 Author:Brajesh Singh
 Author URI: http://buddydev.com
 Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
-Version: 1.1.4
-Last Updated:Spetember 6, 2012
+Version: 1.1.5
+Last Updated:October 9, 2012
 */
 /**
  * Define plugin constants
