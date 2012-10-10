@@ -5,7 +5,23 @@
  */
 
 
-function bp_swa_list_activities($per_page=10,$page=1,$scope='',$max=200,$show_avatar="yes",$show_filters="yes",$included=false,$excluded=false,$is_personal="no",$is_blog_admin_activity="no",$show_post_form="no"){
+function bp_swa_list_activities($args){
+    $defaults=array(
+            'per_page'=>10,
+            'page'=>1,
+            'scope'=>'',
+            'max'=>20,
+            'show_avatar'=>"yes",
+            'show_filters'=>"yes",
+            'included'=>false,
+            'excluded'=>false,
+            'is_personal'=>"no",
+            'is_blog_admin_activity'=>"no",
+            'show_post_form'=>"no");
+    
+    $args=wp_parse_args($args, $defaults);
+    extract($args);
+    
 //check for the scope of activity
 //is it the activity of logged in user/blog admin
 //logged in user over rides blog admin
@@ -39,8 +55,8 @@ function bp_swa_list_activities($per_page=10,$page=1,$scope='',$max=200,$show_av
 			<ul id="activity-filter-links">
 				<?php swa_activity_filter_links("scope=".$scope."&include=".$included."&exclude=".$excluded) ?>
 			</ul>
-          <div class="clear"></div>
-                    <?php endif;?>
+                        <div class="clear"></div>
+          <?php endif;?>
         <?php //echo  'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id;
  	if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id ) ) : ?>
 

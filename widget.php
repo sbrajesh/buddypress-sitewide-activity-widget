@@ -11,6 +11,8 @@ class BP_SWA_Widget extends WP_Widget {
 
 	function widget($args, $instance) {
 		global $bp;
+                if($instance['is_personal']=='yes'&&!is_user_logged_in())
+                    return;//do  not show anything
 		extract( $args );
                 $included_components=$instance["included_components"];
                 $excluded_components=$instance["excluded_components"];
@@ -45,7 +47,16 @@ class BP_SWA_Widget extends WP_Widget {
 		echo	 ' <a class="swa-rss" href="' . bp_get_sitewide_activity_feed_link() . '" title="' . __( 'Site Wide Activity RSS Feed', 'swa' ) . '">' . __( '[RSS]', 'swa' ) . '</a>';
 		echo    $after_title;
 		 
-                   bp_swa_list_activities($instance['per_page'],1,$scope,$instance['max_items'],$instance["show_avatar"],$instance["show_activity_filters"],$included_components,$excluded_components,$instance['is_personal'],$instance['is_blog_admin_activity'],$instance['show_post_form']);
+                $args=$instance;
+                $args['page']=1;
+                $args['scope']=$scope;
+                $args['max']=$instance['max_items'];
+                $args['show_filters']=$instance["show_activity_filters"];
+                $args['included']=$included_components;
+                $args['excluded']=$excluded_components;
+               //is_personal, is_blog_admin activity etc are set in the  
+                
+                   bp_swa_list_activities($args);
 		  ?>
 		<input type='hidden' name='max' id='swa_max_items' value="<?php echo  $instance['max_items'];?>" />  
 		<input type='hidden' name='max' id='swa_per_page' value="<?php echo  $instance['per_page'];?>" />  
