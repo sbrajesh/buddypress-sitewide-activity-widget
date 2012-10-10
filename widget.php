@@ -82,7 +82,7 @@ class BP_SWA_Widget extends WP_Widget {
 		$instance['show_post_form'] = $new_instance['show_post_form']; //should we show the post form or not
 		$instance['show_activity_filters'] =$new_instance['show_activity_filters'] ; //activity filters should be visible or not
 		$instance['show_feed_link'] =  $new_instance['show_feed_link'] ; //feed link should be visible or not
-                 $instance["show_activity_content"]=$new_instance["show_activity_content"];
+                $instance["show_activity_content"]=$new_instance["show_activity_content"];
                
                 $instance["included_components"]=$new_instance["included_components"];
                 $instance["excluded_components"]=$new_instance["excluded_components"];
@@ -94,7 +94,7 @@ class BP_SWA_Widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$instance = wp_parse_args( (array) $instance, array( 'title'=>__('Site Wide Activities','swa'),'max_items' => 200, 'per_page' => 25,'is_personal'=>'no','is_blog_admin_activity'=>'no','show_avatar'=>'yes','show_feed_link'=>'yes','show_post_form'=>'no','allow_reply'=>'no','show_activity_filters'=>'yes','included_components'=>false,'excluded_components'=>false ) );
+		$instance = wp_parse_args( (array) $instance, array( 'title'=>__('Site Wide Activities','swa'),'max_items' => 200, 'per_page' => 25,'is_personal'=>'no','is_blog_admin_activity'=>'no','show_avatar'=>'yes','show_activity_content'=>1,'show_feed_link'=>'yes','show_post_form'=>'no','allow_reply'=>'no','show_activity_filters'=>'yes','included_components'=>false,'excluded_components'=>false,'allow_comment' ) );
 		$per_page = strip_tags( $instance['per_page'] );
 		$max_items = strip_tags( $instance['max_items'] );
 		$title = strip_tags( $instance['title'] );

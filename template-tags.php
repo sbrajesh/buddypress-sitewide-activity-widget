@@ -101,6 +101,7 @@ function bp_swa_list_activities($args){
 //individual entry in the activity stream
 function swa_activity_entry($args){
     extract($args);
+    $allow_comment=false;;//for now, avoid commenting
     ?>
  <?php do_action( 'bp_before_activity_entry' ) ?>
     <li class="<?php bp_activity_css_class() ?>" id="activity-<?php bp_activity_id() ?>">
