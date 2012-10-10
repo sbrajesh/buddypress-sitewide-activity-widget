@@ -82,7 +82,8 @@ class BP_SWA_Widget extends WP_Widget {
 		$instance['show_post_form'] = $new_instance['show_post_form']; //should we show the post form or not
 		$instance['show_activity_filters'] =$new_instance['show_activity_filters'] ; //activity filters should be visible or not
 		$instance['show_feed_link'] =  $new_instance['show_feed_link'] ; //feed link should be visible or not
-
+                 $instance["show_activity_content"]=$new_instance["show_activity_content"];
+               
                 $instance["included_components"]=$new_instance["included_components"];
                 $instance["excluded_components"]=$new_instance["excluded_components"];
                 $instance["is_blog_admin_activity"]=$new_instance["is_blog_admin_activity"];
@@ -129,6 +130,12 @@ class BP_SWA_Widget extends WP_Widget {
                <p><label for="bp-swa-show-feed-link"><?php _e('Show Feed Link:', 'swa'); ?>
                        <label for="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_feed_link' ); ?>" type="radio" <?php if($show_feed_link=='yes') echo "checked='checked'";?> value="yes" style="width: 10%" />Yes</label>
                        <label for="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_no" name="<?php echo $this->get_field_name( 'show_feed_link' ); ?>" type="radio" <?php if($show_feed_link!=='yes') echo "checked='checked'";?> value="no" style="width: 10%" />No</label>
+
+                    </label>
+               </p>
+               <p><label for="bp-swa-show-activity-content"><?php _e('Show Activity Content:', 'swa'); ?>
+                       <label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked($show_activity_content,1) ?> value="1" style="width: 10%" />Yes</label>
+                       <label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked($show_activity_content,0) ?> value="0" style="width: 10%" />No</label>
 
                     </label>
                </p>

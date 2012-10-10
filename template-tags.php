@@ -50,45 +50,48 @@ function bp_swa_list_activities($args){
    ?>
       <div class='swa-wrap'>
           <?php if(is_user_logged_in()&&$show_post_form=="yes")
-                swa_show_post_form();?>
+                swa_show_post_form();
+          ?>
+          
           <?php if($show_filters=="yes"):?>
 			<ul id="activity-filter-links">
 				<?php swa_activity_filter_links("scope=".$scope."&include=".$included."&exclude=".$excluded) ?>
 			</ul>
                         <div class="clear"></div>
           <?php endif;?>
-        <?php //echo  'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id;
- 	if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id ) ) : ?>
+        
+          <?php if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id ) ) : ?>
 
-            <div class="swa-pagination ">
-                    <div class="pag-count" id="activity-count">
-                            <?php bp_activity_pagination_count() ?>
-                    </div>
+                <div class="swa-pagination ">
+                        <div class="pag-count" id="activity-count">
+                                <?php bp_activity_pagination_count() ?>
+                        </div>
 
-                    <div class="pagination-links" id="activity-pag">
-                            &nbsp; <?php bp_activity_pagination_links() ?>
-                    </div>
+                        <div class="pagination-links" id="activity-pag">
+                                &nbsp; <?php bp_activity_pagination_links() ?>
+                        </div>
+                    <div class="clear" ></div>
+                </div>
+
+
                 <div class="clear" ></div>
-            </div>
-
-
-            <div class="clear" ></div>
+                
                 <ul  class="site-wide-stream swa-activity-list">
                     <?php while ( bp_activities() ) : bp_the_activity(); ?>
-                        <?php swa_activity_entry($show_avatar);?>
+                        <?php swa_activity_entry($args);?>
                     <?php endwhile; ?>
                </ul>
 
 	<?php else: ?>
 
-        <div class="widget-error">
-            <?php if($is_personal=="yes")
-                $error=sprintf(__("You have no recent %s activity.","swa"),$scope);
-                else
-                    $error=__('There has been no recent site activity.', 'swa');
-                ?>
-                <?php echo $error; ?>
-        </div>
+                <div class="widget-error">
+                    <?php if($is_personal=="yes")
+                        $error=sprintf(__("You have no recent %s activity.","swa"),$scope);
+                        else
+                            $error=__('There has been no recent site activity.', 'swa');
+                        ?>
+                        <?php echo $error; ?>
+                </div>
 	<?php endif;?>
      </div>
      
@@ -96,7 +99,8 @@ function bp_swa_list_activities($args){
 }
 
 //individual entry in the activity stream
-function swa_activity_entry($show_avatar=false,$allow_comment=false){
+function swa_activity_entry($args){
+    extract($args);
     ?>
  <?php do_action( 'bp_before_activity_entry' ) ?>
     <li class="<?php bp_activity_css_class() ?>" id="activity-<?php bp_activity_id() ?>">
@@ -113,7 +117,7 @@ function swa_activity_entry($show_avatar=false,$allow_comment=false){
 			<?php bp_activity_action() ?>
 		</div>
 
-		<?php if ( bp_activity_has_content() ) : ?>
+		<?php if ( bp_activity_has_content()&&$show_activity_content ) : ?>
 			<div class="swa-activity-inner">
 				<?php bp_activity_content_body() ?>
 			</div>
@@ -135,7 +139,7 @@ function swa_activity_entry($show_avatar=false,$allow_comment=false){
             <a href="<?php bp_activity_thread_permalink() ?>" class="view" title="<?php _e( 'View Thread / Permalink', 'swa' ) ?>"><?php _e( 'View', 'swa' ) ?></a>
 	</div>
     <?php endif; ?>
-    <?php if ( bp_activity_can_comment() ) : 
+    <?php if ( bp_activity_can_comment()&&$show_activity_content ) : 
         
     if(!$allow_comment){
         //hide reply link
