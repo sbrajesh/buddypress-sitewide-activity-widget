@@ -52,10 +52,11 @@ function swa_post_update() {
 		echo '-1<div id="message" class="error"><p>' . __( 'There was a problem posting your update, please try again.', 'swa' ) . '</p></div>';
 		return false;
 	}
-$show_avatar=$_POST["show_avatar"]?$_POST["show_avatar"]:"no";
+    $show_avatar=$_POST["show_avatar"]?$_POST["show_avatar"]:"no";
+    $show_content=$_POST["show_content"]?$_POST["show_content"]:"no";
 	if ( bp_has_activities ( 'include=' . $activity_id ) ) : ?>
 		<?php while ( bp_activities() ) : bp_the_activity(); ?>
-			<?php swa_activity_entry($show_avatar) ?>
+			<?php swa_activity_entry('show_avatar='.$show_avatar.'&show_activity_content='.$show_content) ?>
 		<?php endwhile; ?>
 	 <?php endif;
         exit(0); 

@@ -25,6 +25,7 @@ local_scope=j(local_scope);
 	var included_components=j("#swa_included_components",local_scope).val();
 	var excluded_components=j("#swa_excluded_components",local_scope).val();
 	var show_avatar=j("#swa_show_avatar",local_scope).val();
+	var show_content=j("#swa_show_content",local_scope).val();
 	var show_filters=j("#swa_show_filters",local_scope).val();
 	var is_personal=j("#swa_is_personal",local_scope).val();
 	var is_blog_admin_activity=j("#swa_is_blog_admin_activity",local_scope).val();
@@ -38,6 +39,7 @@ j.post( ajaxurl, {
 			'max'  :max_items,
 			'per_page':per_page,
                         'show_avatar':show_avatar,
+                        'show_content':show_content,
                         'show_filters':show_filters,
                         'is_personal':is_personal,
                         'is_blog_admin_activity':is_blog_admin_activity,

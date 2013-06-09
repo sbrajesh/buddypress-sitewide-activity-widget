@@ -100,6 +100,7 @@ function bp_swa_list_activities($args){
 
 //individual entry in the activity stream
 function swa_activity_entry($args){
+    $args=wp_parse_args($args);
     extract($args);
     $allow_comment=false;;//for now, avoid commenting
     ?>

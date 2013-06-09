@@ -61,6 +61,7 @@ class BP_SWA_Widget extends WP_Widget {
 		<input type='hidden' name='max' id='swa_max_items' value="<?php echo  $instance['max_items'];?>" />  
 		<input type='hidden' name='max' id='swa_per_page' value="<?php echo  $instance['per_page'];?>" />  
 		<input type='hidden' name='show_avatar' id='swa_show_avatar' value="<?php echo  $instance['show_avatar'];?>" />
+		<input type='hidden' name='show_content' id='swa_show_content' value="<?php echo  $instance['show_activity_content'];?>" />
 		<input type='hidden' name='show_filters' id='swa_show_filters' value="<?php echo  $instance['show_activity_filters'];?>" />
 		<input type='hidden' name='included_components' id='swa_included_components' value="<?php echo  $included_components;?>" />
 		<input type='hidden' name='excluded_components' id='swa_excluded_components' value="<?php echo  $excluded_components;?>" />
