@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin name: Buddypress Sitewide activity widget
-Description: Sitewide Activity Widget for Buddypress 1.6+
+Description: Sitewide Activity Widget for BuddyPress 1.7+ (Works with BuddyPress 1.6 too)
 Author:Brajesh Singh
 Author URI: http://buddydev.com
 Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
-Version: 1.1.6
-Last Updated:October 10, 2012
+Version: 1.1.7
+Last Updated: June9, 2013
 */
 
 /**
