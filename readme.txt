@@ -1,10 +1,10 @@
 === Buddypress Sitewide activity Widget ===
-Contributors:sbrajesh
+Contributors:sbrajesh,buddydev
 Donate link: http://buddydev.com/donate/
 Tags: buddypress,buddypress activity,sitewide activity, sitewide activity widget,buddypress sitewide activity widget
-Requires at least: WordPress 3.2+buddypress 1.5
-Tested up to:wordpress 3.2.1+BuddyPress 1.5
-Stable tag: 1.1.3.3
+Requires at least: WordPress 3.5+BuddyPress 1.7
+Tested up to: WordPress 3.5.1+BuddyPress 1.7.2
+Stable tag: 1.1.7
 
 Buddypress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you.
 == Description ==
@@ -14,16 +14,16 @@ Features include:
 
 * Filter By components in UI
 * Limit per page and max
-*Support for post activity from swa widget
-*Support for blog admins activity only
-*Support for logged in users activity only
+* Support for post activity from swa widget
+* Support for blog admins activity only
+* Support for logged in users activity only
 * Show hide avatars
 * Show hide filters
 * Include only a few components activities
 * exclude some components activity from the swa
 * Multi instance
-* easily themabale, showuld not conflict
-*localizable
+* easily themabale, should not conflict
+* localizable
 
 == Installation ==
 
@@ -41,25 +41,27 @@ Add the widget "Site Wide Activity" and save the settings in the widget. That's 
 = Component filters are not shown horizontal =
 
 
-For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/](http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/ "BuddyPress sitewide Plugin page")
+For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/](http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/ "BuddyPress Sitewide Activity Plugin page")
 == Changelog == 
+ = Version 1.1.7 =
+ * Updated for BuddyPress 1.7+ compatibility
  = Version 1.1.3.3 =
  * Updates for BuddyPress 1.5 compatibility
  = Version 1.1 =
- *Support for post activity from swa widget
- *Support for blog admins activity only
- *Support for logged in users activity only
+ * Support for post activity from swa widget
+ * Support for blog admins activity only
+ * Support for logged in users activity only
  * Show hide avatars
  * Show hide filters
  * Include only a few components activities
  * exclude some components activity from the swa
  * Multi instance
  * easily themabale, showuld not conflict
- *localizable
+ * localizable
  = Version 1.0 =
 *Initial release
 
 
 == Other ==
 
-For more info visit us at [BuddyDev.com](http://buddydev.com/ "The best place for all buddypress based plugins,themes tutorials")
+For more info, please visit us at [BuddyDev.com](http://buddydev.com/ "The best place for all BuddyPress based plugins, themes tutorials")
