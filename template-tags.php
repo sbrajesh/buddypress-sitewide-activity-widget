@@ -60,7 +60,7 @@ function bp_swa_list_activities($args){
                         <div class="clear"></div>
           <?php endif;?>
         
-          <?php if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id ) ) : ?>
+          <?php if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page='.$page.'&per_page=' .$per_page.'&object='.$scope."&user_id=".$user_id."&primary_id=".$primary_id.'&scope=0' ) ) : ?>
 
                 <div class="swa-pagination ">
                         <div class="pag-count" id="activity-count">
