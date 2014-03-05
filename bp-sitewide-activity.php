@@ -12,10 +12,10 @@ Last Updated: June9, 2013
 /**
  * Define plugin constants
  */
- $bp_swa_dir =str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
- define('BP_SWA_DIR_NAME',$bp_swa_dir);//the directory name of swa widget
- define('SWA_PLUGIN_DIR',  plugin_dir_path(__FILE__));//the dir path of this plugin with a trailing slash
- define('BP_SWA_PLUGIN_URL',  plugin_dir_url(__FILE__));//the url of this plugin dir with a trailing slash
+ $bp_swa_dir = str_replace( basename( __FILE__ ), '', plugin_basename( __FILE__ ) );
+ define( 'BP_SWA_DIR_NAME', $bp_swa_dir );//the directory name of swa widget
+ define( 'SWA_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );//the dir path of this plugin with a trailing slash
+ define( 'BP_SWA_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );//the url of this plugin dir with a trailing slash
  /**
   * Sitewide Activity Helper Class
   * 
@@ -29,53 +29,54 @@ class SWA_Helper{
        
     private function __construct() {
        //for enqueuing javascript
-        add_action('wp_print_scripts',array($this,'load_js'));
+        add_action( 'wp_print_scripts', array( $this, 'load_js' ) );
         //load css
-        add_action('wp_print_styles',array($this,'load_css'));
+        add_action( 'wp_print_styles', array( $this, 'load_css' ) );
         
         //load text domain
         
-        add_action ( 'bp_loaded', array($this,'load_textdomain'), 2 );
+        add_action ( 'bp_loaded', array( $this, 'load_textdomain' ), 2 );
         
         //register widget
         //register the widget
-        add_action( 'bp_include', array($this,'include_files' ));
-        add_action( 'bp_loaded', array($this,'register_widgets' ));
+        add_action( 'bp_include', array( $this, 'include_files' ) );
+        add_action( 'bp_loaded', array( $this, 'register_widgets' ) );
         //load admin css on widgets.php
-       add_action('admin_print_styles-widgets.php', array($this, 'load_admin_css'));
+       add_action( 'admin_print_styles-widgets.php', array( $this, 'load_admin_css' ) );
     }
     
     //factory for singleton instance
     public static function get_instance(){
-        if(!isset(self::$instance))
-                self::$instance=new self();
+        
+        if( !isset( self::$instance ) )
+                self::$instance = new self();
         
         return self::$instance;
         
     }
     
-    function include_files(){
-        include_once(SWA_PLUGIN_DIR.'ajax.php');
-        include_once(SWA_PLUGIN_DIR.'widget.php');
-        include_once(SWA_PLUGIN_DIR.'template-tags.php');
+    public function include_files(){
+        include_once( SWA_PLUGIN_DIR . 'ajax.php' );
+        include_once( SWA_PLUGIN_DIR . 'widget.php' );
+        include_once( SWA_PLUGIN_DIR . 'template-tags.php' );
         
     }
     
     //get the list of admin users of a blog
-    function get_admin_users_for_blog($blog_id) {
-	global $wpdb,$current_blog;
+    public function get_admin_users_for_blog( $blog_id ) {
+	global $wpdb, $current_blog;
         
-        $meta_key=$wpdb->prefix."_capabilities";//.."_user_level";
+        $meta_key = $wpdb->prefix . '_capabilities';//.."_user_level";
 
-	$role_sql="select user_id,meta_value from {$wpdb->usermeta} where meta_key='". $meta_key."'";
+	$role_sql = "SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key= %s";
 
-	$role=$wpdb->get_results($wpdb->prepare($role_sql),ARRAY_A);
+	$role = $wpdb->get_results( $wpdb->prepare( $role_sql, $meta_key ), ARRAY_A );
 	//clean the role
-	$all_user=array_map("swa_serialize_role",$role);//we are unserializing the role to make that as an array
+	$all_user = array_map( 'swa_serialize_role', $role );//we are unserializing the role to make that as an array
 
-	foreach($all_user as $key=>$user_info)
-		if($user_info['meta_value']['administrator']==1)//if the role is admin
-			$admins[]=$user_info['user_id'];
+	foreach( $all_user as $key => $user_info )
+		if( $user_info['meta_value']['administrator'] == 1 )//if the role is admin
+			$admins[] = $user_info['user_id'];
 
 	return $admins;
 
@@ -84,30 +85,30 @@ class SWA_Helper{
     
     //register the widget
     function register_widgets(){
-        add_action('bp_widgets_init', create_function('', 'return register_widget("BP_SWA_Widget");') );
+        add_action( 'bp_widgets_init', create_function( '', 'return register_widget("BP_SWA_Widget");') );
     }
 
 
 
     //load js if required
-    function load_js(){
-        if(!is_admin())//load only on front end
-            wp_enqueue_script('swa-js',BP_SWA_PLUGIN_URL.'swa.js',array('jquery'));
+    public function load_js() {
+        if( !is_admin() )//load only on front end
+            wp_enqueue_script( 'swa-js', BP_SWA_PLUGIN_URL . 'swa.js', array( 'jquery' ) );
     }
     
-    function load_css(){
-        if(apply_filters('swa_load_css',true))//allow theme developers to override it
-            wp_register_style ('swa-css', BP_SWA_PLUGIN_URL.'swa.css');
-            wp_enqueue_style ('swa-css');
+    public function load_css() {
+        if( apply_filters( 'swa_load_css', true ) )//allow theme developers to override it
+            wp_register_style ( 'swa-css', BP_SWA_PLUGIN_URL . 'swa.css' );
+            wp_enqueue_style ( 'swa-css' );
     }
     
-      function load_admin_css(){
-            wp_register_style ('swa-admin-css', BP_SWA_PLUGIN_URL.'swa-admin.css');
-            wp_enqueue_style ('swa-admin-css');
+    public function load_admin_css(){
+            wp_register_style ( 'swa-admin-css', BP_SWA_PLUGIN_URL . 'swa-admin.css' );
+            wp_enqueue_style ( 'swa-admin-css' );
     }
     
     //localization
-    function load_textdomain() {
+    public function load_textdomain() {
             $locale = apply_filters( 'swa_load_textdomain_get_locale', get_locale() );
             // if load .mo file
             if ( !empty( $locale ) ) {
@@ -127,27 +128,31 @@ class SWA_Helper{
  SWA_Helper::get_instance();
 
 
-function swa_serialize_role($roles){
-	$roles['meta_value']=maybe_unserialize($roles['meta_value']);
-return $roles;
+function swa_serialize_role( $roles ){
+	$roles['meta_value'] = maybe_unserialize( $roles['meta_value'] );
+
+        return $roles;
 }
 
 //locate and load activity post form
 function swa_show_post_form(){
-    include SWA_PLUGIN_DIR.'post-form.php';//no inc_once because we may need form multiple times
+    include SWA_PLUGIN_DIR . 'post-form.php';//no inc_once because we may need form multiple times
 }
 
 
- function swa_get_base_component_scope($include,$exclude){
+ function swa_get_base_component_scope( $include, $exclude ){
      /* Fetch the names of components that have activity recorded in the DB */
 		$components = BP_Activity_Activity::get_recorded_components();
 
-                if(!empty($include))
-                    $components=explode(",",$include);//array of component names
-
-                if(!empty($exclude)){  //exclude all the
-                    $components=array_diff((array)$components, explode(",",$exclude));//diff of exclude/recorded components
-                    }
+                if( !empty( $include ) ) {
+                    $components = explode( ',', $include );//array of component names
+                
+                }   
+                if( !empty( $exclude ) ) {  //exclude all the
+                    
+                    $components = array_diff( (array)$components, explode( ',', $exclude ) );//diff of exclude/recorded components
+                }
+                
        return $components;
  }
 
@@ -157,10 +162,11 @@ function swa_show_post_form(){
 
  function swa_get_blog_admin_id(){
     
-     $blog_id=  get_current_blog_id();
-     $users=  SWA_Helper::get_admin_users_for_blog($blog_id);
-     if(!empty($users))
-         $users=$users[0];//just the first user
+     $blog_id = get_current_blog_id();
+     $users = SWA_Helper::get_admin_users_for_blog( $blog_id );
+     
+     if( !empty( $users ) )
+         $users = $users[0];//just the first user
      return $users;
  }
 
@@ -218,5 +224,3 @@ function swa_show_post_form(){
 
 */
                 
-
-?>

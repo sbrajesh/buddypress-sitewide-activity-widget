@@ -2,25 +2,44 @@
 
  //ajax action handling	for the filters(blogs/profile/groups)
 function swa_ajax_list_activity(){
-	$page=$_POST["page"]?$_POST["page"]:1;
-	$scope=$_POST['scope'];
-	$per_page=$_POST['per_page']?$_POST['per_page']:10;
-	$max=$_POST['max']?$_POST['max']:200;
+	$page = $_POST['page'] ? $_POST['page'] : 1;
+	
+        $scope = $_POST['scope'];
+	
+        $per_page = $_POST['per_page'] ? $_POST['per_page'] : 10;
+	$max= $_POST['max'] ? $_POST['max'] : 200;
 
-        $show_avatar=$_POST['show_avatar']?$_POST['show_avatar']:"yes";
-        $show_filters=$_POST['show_filters']?$_POST['show_filters']:"yes";
-        $included=$_POST['included_components']?$_POST['included_components']:false;
-        $excluded=$_POST['excluded_components']?$_POST['excluded_components']:false;
-        $is_personal=$_POST['is_personal']?$_POST['is_personal']:"no";
-        $is_blog_admin_activity=$_POST['is_blog_admin_activity']?$_POST['is_blog_admin_activity']:"no";
-        $show_post_form=$_POST["show_post_form"]?$_POST["show_post_form"]:"no";
+        $show_avatar = $_POST['show_avatar'] ? $_POST['show_avatar'] : 'yes';
+        $show_filters = $_POST['show_filters'] ? $_POST['show_filters'] : 'yes';
+        
+        $included = $_POST['included_components'] ? $_POST['included_components'] : false;
+        $excluded = $_POST['excluded_components'] ? $_POST['excluded_components'] : false;
+        
+        $is_personal = $_POST['is_personal'] ? $_POST['is_personal'] : 'no';
+        $is_blog_admin_activity = $_POST['is_blog_admin_activity'] ? $_POST['is_blog_admin_activity'] : 'no';
+        
+        $show_post_form = $_POST['show_post_form'] ? $_POST['show_post_form'] : 'no';
                 //$show_filters=true,$included=false,$excluded=false
-	bp_swa_list_activities($per_page,$page,$scope,$max,$show_avatar,$show_filters,$included,$excluded,$is_personal,$is_blog_admin_activity,$show_post_form);
+	bp_swa_list_activities(
+                    array(
+                        'per_page'                  => $per_page,
+                        'page'                      => $page,
+                        'scope'                     => $scope,
+                        'max'                       => $max,
+                        'show_avatar'               => $show_avatar,
+                        'show_filters'              => $show_filters,
+                        'included'                  => $included,
+                        'excluded'                  => $excluded,
+                        'is_personal'               => $is_personal,
+                        'is_blog_admin_activity'    => $is_blog_admin_activity,
+                        'show_post_form'            => $show_post_form
+                ));
 
         exit(0);
 }
 
-add_action("wp_ajax_swa_fetch_content",	"swa_ajax_list_activity");
+add_action( 'wp_ajax_swa_fetch_content',	'swa_ajax_list_activity' );
+add_action( 'wp_ajax_nopriv_swa_fetch_content',	'swa_ajax_list_activity' );
 
 
  /* AJAX update posting */
@@ -63,6 +82,4 @@ function swa_post_update() {
 }
 
 
-add_action("wp_ajax_swa_post_update","swa_post_update");//hook to post update
-
-?>
+add_action( 'wp_ajax_swa_post_update', 'swa_post_update' );//hook to post update
