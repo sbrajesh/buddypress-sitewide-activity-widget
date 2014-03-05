@@ -17,7 +17,7 @@ function bp_swa_list_activities( $args ){
             'excluded'                  => false,
             'is_personal'               => 'no',
             'is_blog_admin_activity'    => 'no',
-            'show_post_form'            =>  'no'
+            'show_post_form'            => 'no'
         );
     
     $args = wp_parse_args( $args, $defaults );
@@ -103,7 +103,7 @@ function bp_swa_list_activities( $args ){
 function swa_activity_entry( $args ){
     $args = wp_parse_args( $args );
     extract( $args );
-    $allow_comment = false;;//for now, avoid commenting
+    $allow_comment = false;//we can provide an option in future to allow commenting
     ?>
  
     <?php do_action( 'bp_before_activity_entry' ) ?>
@@ -189,8 +189,8 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 	function swa_get_activity_filter_links( $args = false ) {
 		global $activities_template, $bp;
                 
-                echo $args;
-                $link='';
+                
+                $link = '';
 		$defaults = array(
 			'style' => 'list'
 		);
@@ -199,7 +199,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 		$r = wp_parse_args( $args, $defaults );
 		extract( $r, EXTR_SKIP );
 
-		$components=swa_get_base_component_scope($include,$exclude);
+		$components = swa_get_base_component_scope( $include, $exclude );
                  
                 if ( !$components )
 			return false;
@@ -262,4 +262,3 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
                  return false;
 	}
 
-?>

@@ -9,33 +9,35 @@ class BP_SWA_Widget extends WP_Widget {
 		parent::__construct( false, $name = __( 'Site Wide Activity', 'swa' ) );
 	}
 
-	function widget($args, $instance) {
+	function widget( $args, $instance ) {
 		global $bp;
-                if($instance['is_personal']=='yes'&&!is_user_logged_in())
+                if( $instance['is_personal'] == 'yes' && !is_user_logged_in() )
                     return;//do  not show anything
 		extract( $args );
-                $included_components=$instance["included_components"];
-                $excluded_components=$instance["excluded_components"];
-                if(empty($included_components))
-                    $included_components=BP_Activity_Activity::get_recorded_components();
+                
+                $included_components = $instance["included_components"];
+                $excluded_components = $instance["excluded_components"];
+                
+                if( empty( $included_components ) )
+                    $included_components = BP_Activity_Activity::get_recorded_components();
                 
                 //let us assume that the scope is selected components
-                $scope=$included_components;
+                $scope = $included_components;
                 
                 //if the user has excluded some of the components , let us remove it from scope
-                if(!empty($scope)&&is_array($excluded_components))
-                    $scope=array_diff($scope,$excluded_components);
+                if( !empty( $scope ) && is_array( $excluded_components ) )
+                    $scope = array_diff( $scope, $excluded_components );
                 
                 //ok, now we will create a comma separated list
-                if(!empty($scope))
-                    $scope=join(",",$scope);
+                if( !empty( $scope ) )
+                    $scope = join( ',', $scope );
                 
 
-                if(!empty ($included_components)&&  is_array($included_components))
-                    $included_components=join(",",$included_components);
+                if( !empty ( $included_components ) && is_array( $included_components ) )
+                    $included_components = join( ',', $included_components );
                 
-                 if(!empty ($excluded_components)&&  is_array($excluded_components))
-                    $excluded_components=join(",",$excluded_components);
+                 if( !empty ( $excluded_components ) && is_array( $excluded_components ) )
+                    $excluded_components = join( ',', $excluded_components );
                  
                  //find scope
                  
@@ -43,20 +45,20 @@ class BP_SWA_Widget extends WP_Widget {
 		echo $before_widget;
 		echo $before_title
 		   . $instance['title'] ;
-                if($instance['show_feed_link']=="yes")
+                if($instance['show_feed_link'] == 'yes' )
 		echo	 ' <a class="swa-rss" href="' . bp_get_sitewide_activity_feed_link() . '" title="' . __( 'Site Wide Activity RSS Feed', 'swa' ) . '">' . __( '[RSS]', 'swa' ) . '</a>';
 		echo    $after_title;
 		 
-                $args=$instance;
-                $args['page']=1;
-                $args['scope']=$scope;
-                $args['max']=$instance['max_items'];
-                $args['show_filters']=$instance["show_activity_filters"];
-                $args['included']=$included_components;
-                $args['excluded']=$excluded_components;
+                $args = $instance;
+                $args['page'] = 1;
+                $args['scope'] = $scope;
+                $args['max'] = $instance['max_items'];
+                $args['show_filters'] = $instance["show_activity_filters"];
+                $args['included'] = $included_components;
+                $args['excluded'] = $excluded_components;
                //is_personal, is_blog_admin activity etc are set in the  
                 
-                   bp_swa_list_activities($args);
+                   bp_swa_list_activities( $args );
 		  ?>
 		<input type='hidden' name='max' id='swa_max_items' value="<?php echo  $instance['max_items'];?>" />  
 		<input type='hidden' name='max' id='swa_per_page' value="<?php echo  $instance['per_page'];?>" />  
@@ -75,20 +77,24 @@ class BP_SWA_Widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
+                
 		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['max_items'] = strip_tags( $new_instance['max_items'] );
+		
+                $instance['max_items'] = strip_tags( $new_instance['max_items'] );
 		$instance['per_page'] = strip_tags( $new_instance['per_page'] );
-		$instance['show_avatar'] =  $new_instance['show_avatar']; //avatar should be visible or not
+		
+                $instance['show_avatar'] = $new_instance['show_avatar']; //avatar should be visible or not
 		$instance['allow_reply'] = $new_instance['allow_reply']; //allow reply inside widget or not
 		$instance['show_post_form'] = $new_instance['show_post_form']; //should we show the post form or not
-		$instance['show_activity_filters'] =$new_instance['show_activity_filters'] ; //activity filters should be visible or not
+		$instance['show_activity_filters'] = $new_instance['show_activity_filters'] ; //activity filters should be visible or not
 		$instance['show_feed_link'] =  $new_instance['show_feed_link'] ; //feed link should be visible or not
-                $instance["show_activity_content"]=$new_instance["show_activity_content"];
+                $instance["show_activity_content"]= $new_instance["show_activity_content"];
                
-                $instance["included_components"]=$new_instance["included_components"];
-                $instance["excluded_components"]=$new_instance["excluded_components"];
-                $instance["is_blog_admin_activity"]=$new_instance["is_blog_admin_activity"];
-                $instance["is_personal"]=$new_instance["is_personal"];
+                $instance["included_components"] = $new_instance["included_components"];
+                $instance["excluded_components"] = $new_instance["excluded_components"];
+                
+                $instance["is_blog_admin_activity"] = $new_instance["is_blog_admin_activity"];
+                $instance["is_personal"] = $new_instance["is_personal"];
                   
 
 		return $instance;
@@ -182,4 +188,3 @@ class BP_SWA_Widget extends WP_Widget {
 	<?php
 	}
 }
-?>

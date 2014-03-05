@@ -11,6 +11,7 @@ function swa_ajax_list_activity(){
 
         $show_avatar = $_POST['show_avatar'] ? $_POST['show_avatar'] : 'yes';
         $show_filters = $_POST['show_filters'] ? $_POST['show_filters'] : 'yes';
+        $show_content = $_POST['show_content'] ? $_POST['show_content'] : 'yes';
         
         $included = $_POST['included_components'] ? $_POST['included_components'] : false;
         $excluded = $_POST['excluded_components'] ? $_POST['excluded_components'] : false;
@@ -32,6 +33,7 @@ function swa_ajax_list_activity(){
                         'excluded'                  => $excluded,
                         'is_personal'               => $is_personal,
                         'is_blog_admin_activity'    => $is_blog_admin_activity,
+                        'show_activity_content'     => $show_content, 
                         'show_post_form'            => $show_post_form
                 ));
 
@@ -71,8 +73,8 @@ function swa_post_update() {
 		echo '-1<div id="message" class="error"><p>' . __( 'There was a problem posting your update, please try again.', 'swa' ) . '</p></div>';
 		return false;
 	}
-    $show_avatar=$_POST["show_avatar"]?$_POST["show_avatar"]:"no";
-    $show_content=$_POST["show_content"]?$_POST["show_content"]:"no";
+    $show_avatar= isset( $_POST["show_avatar"] )? $_POST["show_avatar"] : "no";
+    $show_content= isset($_POST["show_content"]) ? $_POST["show_content"] : "no";
 	if ( bp_has_activities ( 'include=' . $activity_id ) ) : ?>
 		<?php while ( bp_activities() ) : bp_the_activity(); ?>
 			<?php swa_activity_entry('show_avatar='.$show_avatar.'&show_activity_content='.$show_content) ?>
