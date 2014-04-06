@@ -7,7 +7,7 @@
 class BP_SWA_Widget extends WP_Widget {
     
 	public function __construct() {
-		parent::__construct( false, $name = __( 'Site Wide Activity', 'swa' ) );
+		parent::__construct( false, $name = __( '(BuddyPress) Site Wide Activity', 'swa' ) );
 	}
 
 	public function widget( $args, $instance ) {
