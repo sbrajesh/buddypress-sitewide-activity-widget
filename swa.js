@@ -100,7 +100,7 @@ jq(document).on('click', 'input#swa-whats-new-submit', function() {
 
 
         form.children().each( function() {
-                if ( j.nodeName(this, "textarea") || j.nodeName(this, "input") )
+                if ( jq.nodeName(this, "textarea") || jq.nodeName(this, "input") )
                         jq(this).prop( 'disabled', 'disabled' );
         });
         //disabled
@@ -120,7 +120,7 @@ jq(document).on('click', 'input#swa-whats-new-submit', function() {
                 object = jq("#swa-whats-new-post-object",parent).val();
         }
         var show_avatar=jq("#swa_show_avatar",parent).val();
-        j.post( ajaxurl, {
+        jq.post( ajaxurl, {
                 action: 'swa_post_update',
                 'cookie': encodeURIComponent(document.cookie),
                 '_wpnonce_swa_post_update': jq("input#_wpnonce_swa_post_update").val(),
@@ -134,7 +134,7 @@ jq(document).on('click', 'input#swa-whats-new-submit', function() {
                 jq( 'form#' + form.attr('id') + ' span.ajax-loader',parent ).hide();
 
                 form.children().each( function() {
-                        if ( j.nodeName(this, "textarea") || j.nodeName(this, "input") )
+                        if ( jq.nodeName(this, "textarea") || jq.nodeName(this, "input") )
                                 jq(this).prop( 'disabled', '' );
                 });
 
