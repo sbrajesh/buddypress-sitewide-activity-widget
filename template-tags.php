@@ -190,7 +190,8 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 		global $activities_template, $bp;
                 
                 
-                $link = '';
+                
+        $link = '';
 		$defaults = array(
 			'style' => 'list'
 		);
@@ -201,7 +202,8 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 
 		$components = swa_get_base_component_scope( $include, $exclude );
                  
-                if ( !$components )
+                
+        if ( !$components )
 			return false;
                  
 		foreach ( (array) $components as $component ) {
@@ -212,11 +214,11 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 			if ( isset( $_GET['afilter'] ) && $component == $_GET['afilter'] )
 				$selected = ' class="selected"';
 			else
-				$selected='';
+				$selected = '';
 
 			$component = esc_attr( $component );
-                        if($component=='xprofile')
-                            $component='profile';
+                        //if($component=='xprofile')
+                            //$component='profile';
                         
 			switch ( $style ) {
 				case 'list':
@@ -247,18 +249,26 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 			$component_links[] = $before . '<a href="' . esc_attr( $link ) . '">' . ucwords( __( $component, 'swa' ) ) . '</a>' . $after;
 		}
 
-		$link = remove_query_arg( 'afilter' , $link );
+		
 
 		
                  
-                     if ( !empty( $_REQUEST['scope'] ) ){
-                        $link .= "?afilter=";
-        			$component_links[] = '<' . $tag . ' id="afilter-clear"><a href="' . esc_attr( $link ) . '"">' . __( 'Clear Filter', 'swa' ) . '</a></' . $tag . '>';
-                     }
+                     
+        if ( !empty( $_REQUEST['scope'] ) ){
+            
+            $link = remove_query_arg( 'afilter' , $link );            
+            $link = $link."?afilter=";
+        			
+            $component_links[] = "<{$tag} id='afilter-clear'><a href='". esc_attr( $link ) . "'>" . __( 'Clear Filter', 'swa' ) . "</a></{$tag}>";
+                     
+            
+        }
 
-                     if(!empty($component_links))
-                        return apply_filters( 'swa_get_activity_filter_links', implode( "\n", $component_links ),$component_links );
+                     
+        if( !empty( $component_links ) )
+            return apply_filters( 'swa_get_activity_filter_links', implode( "\n", $component_links ), $component_links );
                
-                 return false;
+                 
+        return false;
 	}
 

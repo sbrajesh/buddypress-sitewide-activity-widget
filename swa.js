@@ -1,79 +1,87 @@
 jQuery(document).ready(function(){
     
-    var j = jQuery;
     var jq = jQuery;
 
-    j(document).on('click', '.widget_bp_swa_widget div.pagination-links a', function(){
+    jq(document).on( 'click', '.widget_bp_swa_widget div.pagination-links a', function(){
         
-        var parent = j(this).parents('.widget_bp_swa_widget').get(0);
-        parent = j(parent);//cast as jquery object
+        var parent = jq(this).parents( '.widget_bp_swa_widget' ).get(0);
+        parent = jq(parent);//cast as jquery object
 	
-        var page = get_var_in_url(j(this).attr("href"),"acpage");
-	//determine current scope
-	var scope = '';
+        var page = get_var_in_url( jq(this).attr("href"), "acpage" );
+	  //determine current scope
 	
-        if(j('#activity-filter-links li', parent).get(0)){
-            var scope_anchor = j('#activity-filter-links li.selected a',parent);
+        var scope = jq('#swa_scope').val();
+	
+             
+        fetch_and_show_activity( page, scope, parent );
+        
+        return false;
+    });
+
+    function fetch_and_show_activity( page, scope, local_scope ){
+
+        
+        local_scope = jq( local_scope );
+
+        var per_page = jq("#swa_per_page", local_scope ).val();
+        var max_items = jq( "#swa_max_items", local_scope ).val();
+        var included_components = jq( "#swa_included_components", local_scope ).val();
+        var excluded_components = jq( "#swa_excluded_components", local_scope ).val();
+        var show_avatar = jq( "#swa_show_avatar", local_scope ).val();
+        var show_content = jq( "#swa_show_content", local_scope ).val();
+        var show_filters = jq( "#swa_show_filters", local_scope ).val();
+        var is_personal = jq( "#swa_is_personal", local_scope ).val();
+        var is_blog_admin_activity = jq( "#swa_is_blog_admin_activity", local_scope ).val();
+        var show_post_form = jq( "#swa_show_post_form", local_scope ).val();
+
+
+
+            jq.post( ajaxurl, {
+                action: 'swa_fetch_content',
+                cookie: encodeURIComponent(document.cookie),
+                page:   page,
+                scope:  scope,
+                max:    max_items,
+                per_page: per_page,
+                show_avatar: show_avatar,
+                show_content: show_content,
+                show_filters: show_filters,
+                is_personal: is_personal,
+                is_blog_admin_activity: is_blog_admin_activity,
+                included_components: included_components,
+                excluded_components: excluded_components,
+                show_post_form: show_post_form
+                },
             
-            if(scope_anchor.get(0))
-		scope = get_var_in_url(j(scope_anchor).attr('href'),'afilter');
+                function(response){
+                    jq(".swa-wrap", local_scope ).replaceWith( response );
+                    jq('form.swa-ac-form').hide();
+                    jq("#activity-filter-links li#afilter-"+scope, local_scope ).addClass("selected");
 
-	}
-        
-        fetch_and_show_activity(page,scope,parent);
-    return false;
-});
+                });//for pagination
 
-function fetch_and_show_activity(page,scope,local_scope){
-        
-        local_scope = j(local_scope);
-
-	var per_page = j("#swa_per_page",local_scope).val();
-	var max_items = j("#swa_max_items",local_scope).val();
-	var included_components = j("#swa_included_components",local_scope).val();
-	var excluded_components = j("#swa_excluded_components",local_scope).val();
-	var show_avatar = j("#swa_show_avatar",local_scope).val();
-	var show_content = j("#swa_show_content",local_scope).val();
-	var show_filters = j("#swa_show_filters",local_scope).val();
-	var is_personal = j("#swa_is_personal",local_scope).val();
-	var is_blog_admin_activity = j("#swa_is_blog_admin_activity",local_scope).val();
-	var show_post_form = j("#swa_show_post_form",local_scope).val();
-			
-
-    
-        j.post( ajaxurl, {
-			'action': 'swa_fetch_content',
-			'cookie': encodeURIComponent(document.cookie),
-			'page': page,
-			'scope': scope,
-			'max'  :max_items,
-			'per_page':per_page,
-                        'show_avatar':show_avatar,
-                        'show_content':show_content,
-                        'show_filters':show_filters,
-                        'is_personal':is_personal,
-                        'is_blog_admin_activity':is_blog_admin_activity,
-                        'included_components':included_components,
-                        'excluded_components':excluded_components,
-                        'show_post_form':show_post_form
-			},
-		function(response){
-			j(".swa-wrap",local_scope).replaceWith(response);
-                         j('form.swa-ac-form').hide();
-			j("#activity-filter-links li#afilter-"+scope,local_scope).addClass("selected");
-
-			});//for pagination
-
-}
+    }
 
 
 //for filters
-j(document).on('click', '.widget_bp_swa_widget #activity-filter-links li a', function(){
-     var parent=j(this).parents(".widget_bp_swa_widget").get(0);
-     parent=j(parent);//cast as jquery object
-	var page=1;//when ever someone clicks on a filter link, start by showing the first
-	var scope=get_var_in_url(j(this).attr("href"),"afilter");//'get_current_scope';
-	fetch_and_show_activity(page,scope,parent);
+jq(document).on( 'click', '.widget_bp_swa_widget #activity-filter-links li a', function(){
+    
+    var parent = jq(this).parents(".widget_bp_swa_widget").get(0);
+     
+    parent = jq(parent);//cast as jquery object
+	
+    var page = 1;//when ever someone clicks on a filter link, start by showing the first
+    var scope = '';
+   
+    if( jq(this).parent().attr('id') == 'afilter-clear'){
+        scope = jq( '#swa-original-scope', parent).val();//we just reset to the original scope set by the widget
+    }else{
+	
+        scope = get_var_in_url(jq(this).attr("href"),"afilter");//'get_current_scope';
+    }
+        //update the dom scope
+    jq('#swa-scope').val( scope );
+	fetch_and_show_activity( page, scope, parent );
 	//make the current filter selected
 
 	return false;
@@ -84,38 +92,38 @@ j(document).on('click', '.widget_bp_swa_widget #activity-filter-links li a', fun
 
 	/* New posts */
         //copied from bp-default global.js
-j(document).on('click', 'input#swa-whats-new-submit', function() {
-        var button = j(this);
+jq(document).on('click', 'input#swa-whats-new-submit', function() {
+        var button = jq(this);
         var form = button.parent().parent().parent().parent();
-        var parent=j(this).parents(".widget_bp_swa_widget").get(0);//GET THE PARENT FOR SCOPING
-        parent=j(parent);//convert to jquery object
+        var parent=jq(this).parents(".widget_bp_swa_widget").get(0);//GET THE PARENT FOR SCOPING
+        parent=jq(parent);//convert to jquery object
 
 
         form.children().each( function() {
                 if ( j.nodeName(this, "textarea") || j.nodeName(this, "input") )
-                        j(this).prop( 'disabled', 'disabled' );
+                        jq(this).prop( 'disabled', 'disabled' );
         });
         //disabled
-        j( 'form#' + form.attr('id') + ' span.ajax-loader' ,parent).show();
+        jq( 'form#' + form.attr('id') + ' span.ajax-loader' ,parent).show();
 
         /* Remove any errors */
-        j('div.error',parent).remove();
+        jq('div.error',parent).remove();
         button.prop('disabled','disabled');
 
         /* Default POST values */
         var object = '';
-        var item_id = j("#swa-whats-new-post-in",parent).val();
-        var content = j("textarea#swa-whats-new",parent).val();
+        var item_id = jq("#swa-whats-new-post-in",parent).val();
+        var content = jq("textarea#swa-whats-new",parent).val();
 
         /* Set object for non-profile posts */
         if ( item_id > 0 ) {
-                object = j("#swa-whats-new-post-object",parent).val();
+                object = jq("#swa-whats-new-post-object",parent).val();
         }
-        var show_avatar=j("#swa_show_avatar",parent).val();
+        var show_avatar=jq("#swa_show_avatar",parent).val();
         j.post( ajaxurl, {
                 action: 'swa_post_update',
                 'cookie': encodeURIComponent(document.cookie),
-                '_wpnonce_swa_post_update': j("input#_wpnonce_swa_post_update").val(),
+                '_wpnonce_swa_post_update': jq("input#_wpnonce_swa_post_update").val(),
                 'content': content,
                 'object': object,
                 'item_id': item_id,
@@ -123,30 +131,30 @@ j(document).on('click', 'input#swa-whats-new-submit', function() {
         },
         function(response)
         {
-                j( 'form#' + form.attr('id') + ' span.ajax-loader',parent ).hide();
+                jq( 'form#' + form.attr('id') + ' span.ajax-loader',parent ).hide();
 
                 form.children().each( function() {
                         if ( j.nodeName(this, "textarea") || j.nodeName(this, "input") )
-                                j(this).prop( 'disabled', '' );
+                                jq(this).prop( 'disabled', '' );
                 });
 
                 /* Check for errors and append if found. */
                 if ( response[0] + response[1] == '-1' ) {
                         form.prepend( response.substr( 2, response.length ) );
-                        j( 'form#' + form.attr('id') + ' div.error',parent).hide().fadeIn( 200 );
+                        jq( 'form#' + form.attr('id') + ' div.error',parent).hide().fadeIn( 200 );
                         button.prop("disabled", '');
                 } else {
-                        if ( 0 == j("ul.swa-activity-list",parent).length ) {
-                                j("div.error",parent).slideUp(100).remove();
-                                j("div#message",parent).slideUp(100).remove();
-                                j("div.activity",parent).append( '<ul id="activity-stream" class="site-wide-stream swa-activity-list">' );
+                        if ( 0 == jq("ul.swa-activity-list",parent).length ) {
+                                jq("div.error",parent).slideUp(100).remove();
+                                jq("div#message",parent).slideUp(100).remove();
+                                jq("div.activity",parent).append( '<ul id="activity-stream" class="site-wide-stream swa-activity-list">' );
                         }
 
-                        j("ul.swa-activity-list",parent).prepend(response);
-                        j("ul.swa-activity-list li:first",parent).addClass('new-update');
-                        j("li.new-update",parent).hide().slideDown( 300 );
-                        j("li.new-update",parent).removeClass( 'new-update' );
-                        j("textarea#swa-whats-new",parent).val('');
+                        jq("ul.swa-activity-list",parent).prepend(response);
+                        jq("ul.swa-activity-list li:first",parent).addClass('new-update');
+                        jq("li.new-update",parent).hide().slideDown( 300 );
+                        jq("li.new-update",parent).removeClass( 'new-update' );
+                        jq("textarea#swa-whats-new",parent).val('');
 
                         /* Re-enable the submit button after 8 seconds. */
                         setTimeout( function() { button.prop("disabled", ''); }, 8000 );
