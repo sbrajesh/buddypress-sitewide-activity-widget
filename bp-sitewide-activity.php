@@ -142,7 +142,7 @@ function swa_show_post_form(){
 
  function swa_get_base_component_scope( $include, $exclude ){
      /* Fetch the names of components that have activity recorded in the DB */
-		$components = BP_Activity_Activity::get_recorded_components();
+		$components = swa_get_recorded_components();
 
                 if( !empty( $include ) ) {
                     $components = explode( ',', $include );//array of component names
@@ -169,8 +169,24 @@ function swa_show_post_form(){
          $users = $users[0];//just the first user
      return $users;
  }
+function swa_get_recorded_components(){
+    
+    $components = BP_Activity_Activity::get_recorded_components();
+    
+    return array_diff((array) $components, array('members') );
+    
+}
 
-
+function swa_scope_has_changed( $new_scopes ){
+    
+    $old_scope = $_REQUEST['original_scope'];
+    if( !$old_scope )
+        return false;
+    
+    if( $old_scope == $new_scopes )
+        return false;
+    return true;
+}
 
 /**
  * We do not use the code below in current version, I am leaving it in the hope that in future version, we may need this

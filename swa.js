@@ -50,7 +50,8 @@ jQuery(document).ready(function(){
                 is_blog_admin_activity: is_blog_admin_activity,
                 included_components: included_components,
                 excluded_components: excluded_components,
-                show_post_form: show_post_form
+                show_post_form: show_post_form,
+                original_scope: jq('#swa-original-scope').val()
                 },
             
                 function(response){

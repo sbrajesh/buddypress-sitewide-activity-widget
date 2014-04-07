@@ -23,7 +23,7 @@ class BP_SWA_Widget extends WP_Widget {
         $excluded_components = $instance['excluded_components'];
 
         if( empty( $included_components ) )
-            $included_components = BP_Activity_Activity::get_recorded_components();
+            $included_components = swa_get_recorded_components();
 
         //let us assume that the scope is selected components
         $scope = $included_components;
@@ -177,7 +177,7 @@ class BP_SWA_Widget extends WP_Widget {
             <div class="swa-widgte-block">
                 <p><label for="bp-swa-included-filters"><strong><?php _e('Include only following Filters:', 'swa'); ?></strong></label></p>
                 <p> 
-                        <?php $recorded_components = BP_Activity_Activity::get_recorded_components();
+                        <?php $recorded_components = swa_get_recorded_components();
                             foreach((array)$recorded_components as $component):?>
                                 <label for="<?php echo $this->get_field_id( 'included_components' ).'_'.$component ?>" ><?php echo ucwords($component);?> <input id="<?php echo $this->get_field_id( 'included_components' ).'_'.$component ?>" name="<?php echo $this->get_field_name( 'included_components' ); ?>[]" type="checkbox" <?php if(is_array($included_components)&&in_array($component, $included_components)) echo "checked='checked'";?> value="<?php echo $component;?>" style="width: 10%" /></label>
                         <?php endforeach;?>
@@ -188,7 +188,7 @@ class BP_SWA_Widget extends WP_Widget {
                    
                 <p><label for="bp-swa-included-filters"><strong><?php _e('Exclude following Components activity', 'swa'); ?></strong></label></p>
                     <p>
-                        <?php $recorded_components = BP_Activity_Activity::get_recorded_components();
+                        <?php //$recorded_components = BP_Activity_Activity::get_recorded_components();
                             foreach( (array)$recorded_components as $component ):?>
                                 <label for="<?php echo $this->get_field_id( 'excluded_components' ).'_'.$component ?>" ><?php echo ucwords($component);?> <input id="<?php echo $this->get_field_id( 'excluded_components' ).'_'.$component ?>" name="<?php echo $this->get_field_name( 'excluded_components' ); ?>[]" type="checkbox" <?php if(is_array($excluded_components)&&in_array($component, $excluded_components)) echo "checked='checked'";?> value="<?php echo $component;?>" style="width: 10%" /></label>
                         <?php endforeach;?>

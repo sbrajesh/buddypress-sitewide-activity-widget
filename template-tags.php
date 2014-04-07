@@ -254,7 +254,7 @@ function swa_activity_filter_links( $args = false ) {//copy of bp_activity_filte
 		
                  
                      
-        if ( !empty( $_REQUEST['scope'] ) ){
+        if ( !empty( $_REQUEST['scope']) && swa_scope_has_changed( $_REQUEST['scope'] ) ){
             
             $link = remove_query_arg( 'afilter' , $link );            
             $link = $link."?afilter=";

@@ -7,7 +7,7 @@ function swa_ajax_list_activity(){
         $scope = $_POST['scope'];
 	
         $per_page = $_POST['per_page'] ? $_POST['per_page'] : 10;
-	$max= $_POST['max'] ? $_POST['max'] : 200;
+        $max= $_POST['max'] ? $_POST['max'] : 200;
 
         $show_avatar = $_POST['show_avatar'] ? $_POST['show_avatar'] : 'yes';
         $show_filters = $_POST['show_filters'] ? $_POST['show_filters'] : 'yes';
