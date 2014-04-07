@@ -3,12 +3,12 @@ Contributors:sbrajesh,buddydev
 Donate link: http://buddydev.com/donate/
 Tags: buddypress,buddypress activity,sitewide activity, sitewide activity widget,buddypress sitewide activity widget
 Requires at least: WordPress 3.5+BuddyPress 1.7
-Tested up to: WordPress 3.5.1+BuddyPress 1.7.2
-Stable tag: 1.1.7
+Tested up to: WordPress 3.8.1+BuddyPress 2.0 beta 1
+Stable tag: 1.2
 
 Buddypress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you.
 == Description ==
-Buddypress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you. Now you can show the sitewide acyivity in a widget area.
+Buddypress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you. Now you can show the sitewide activity in a widget area.
 
 Features include:
 
@@ -43,6 +43,9 @@ Add the widget "Site Wide Activity" and save the settings in the widget. That's 
 
 For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/](http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/ "BuddyPress Sitewide Activity Plugin page")
 == Changelog == 
+
+ = Version 1.2 =
+ * Major rewrite for BuddyPress 1.8+( tested with BuddyPress 2.0 beta 1)
  = Version 1.1.7 =
  * Updated for BuddyPress 1.7+ compatibility
  = Version 1.1.3.3 =
@@ -56,7 +59,7 @@ For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-acti
  * Include only a few components activities
  * exclude some components activity from the swa
  * Multi instance
- * easily themabale, showuld not conflict
+ * easily themabale, should not conflict
  * localizable
  = Version 1.0 =
 *Initial release
