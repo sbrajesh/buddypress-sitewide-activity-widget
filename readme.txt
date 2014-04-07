@@ -41,7 +41,7 @@ Add the widget "Site Wide Activity" and save the settings in the widget. That's 
 = Component filters are not shown horizontal =
 
 
-For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/](http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/ "BuddyPress Sitewide Activity Plugin page")
+For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-update-buddypress-1-9-buddypress-2-0/](http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/ "BuddyPress Sitewide Activity Plugin page")
 == Changelog == 
 
  = Version 1.2 =
