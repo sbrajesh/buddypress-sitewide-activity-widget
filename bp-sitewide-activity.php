@@ -115,7 +115,7 @@ class SWA_Helper {
 	public function load_js() {
 		
 		if ( ! is_admin() ) {
-			wp_enqueue_script( 'swa-js', $this->url . 'swa.js', array( 'jquery' ) );
+			wp_enqueue_script( 'swa-js', $this->url . 'assets/swa.js', array( 'jquery' ) );
 		}
 		
 	}
@@ -123,7 +123,7 @@ class SWA_Helper {
 	public function load_css() {
 		
 		if ( apply_filters( 'swa_load_css', true ) ) {
-			wp_register_style( 'swa-css', $this->url . 'swa.css' );
+			wp_register_style( 'swa-css', $this->url . 'assets/swa.css' );
 			wp_enqueue_style( 'swa-css' );
 		}
 			
@@ -135,7 +135,7 @@ class SWA_Helper {
 	 */
 	public function load_admin_css() {
 		
-		wp_register_style( 'swa-admin-css', $this->url . 'swa-admin.css' );
+		wp_register_style( 'swa-admin-css', $this->url . 'assets/swa-admin.css' );
 		wp_enqueue_style( 'swa-admin-css' );
 	}
 
