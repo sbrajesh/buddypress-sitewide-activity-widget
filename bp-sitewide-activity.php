@@ -101,7 +101,7 @@ class SWA_Helper {
 			'core/functions.php',
 			'core/template.php',
 			'ajax.php',
-			'widget.php',
+			'core/widget.php',
 			'template-tags.php',
 		);
 		
