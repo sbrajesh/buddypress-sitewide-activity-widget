@@ -1,11 +1,4 @@
 <?php
-
-function swa_serialize_role ( $roles ) {
-	$roles['meta_value'] = maybe_unserialize( $roles['meta_value'] );
-
-	return $roles;
-}
-
 //locate and load activity post form
 function swa_show_post_form () {
 	include swa_helper() . 'post-form.php'; //no inc_once because we may need form multiple times
