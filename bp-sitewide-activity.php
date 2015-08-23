@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Buddypress Sitewide Activity Widget
  * Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
- * Version: 1.2
+ * Version: 1.3.0
  * Author: Brajesh Singh( BuddyDev.com )
  * Author IRI: http://buddydev.com
  * 
@@ -144,7 +144,7 @@ class SWA_Helper {
 	 */
 	public function load_textdomain() {
 		
-		load_plugin_textdomain( 'buddypress-sitewide-activity-widget', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'swa', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 	
 	/**

@@ -8,7 +8,7 @@
 class BP_SWA_Widget extends WP_Widget {
 
 	public function __construct () {
-		parent::__construct( false, $name = __( '(BuddyPress) Site Wide Activity', 'buddypress-sitewide-activity-widget' ) );
+		parent::__construct( false, $name = __( '(BuddyPress) Site Wide Activity', 'swa' ) );
 	}
 
 	public function widget ( $args, $instance ) {
@@ -56,7 +56,7 @@ class BP_SWA_Widget extends WP_Widget {
 		echo $before_title . $instance['title'];
 		
 		if ( $instance['show_feed_link'] == 'yes' ) {
-			echo ' <a class="swa-rss" href="' . bp_get_sitewide_activity_feed_link() . '" title="' . __( 'Site Wide Activity RSS Feed', 'buddypress-sitewide-activity-widget' ) . '">' . __( '[RSS]', 'buddypress-sitewide-activity-widget' ) . '</a>';
+			echo ' <a class="swa-rss" href="' . bp_get_sitewide_activity_feed_link() . '" title="' . __( 'Site Wide Activity RSS Feed', 'swa' ) . '">' . __( '[RSS]', 'swa' ) . '</a>';
 		}
 		
 		echo $after_title;
