@@ -1,7 +1,8 @@
 <?php
 //locate and load activity post form
 function swa_show_post_form () {
-	include swa_helper() . 'post-form.php'; //no inc_once because we may need form multiple times
+	
+	include swa_helper()->get_path() . 'template/post-form.php'; //no inc_once because we may need form multiple times
 }
 
 function swa_get_base_component_scope ( $include, $exclude ) {
@@ -25,7 +26,7 @@ function swa_get_blog_admin_id () {
 	$blog_id = get_current_blog_id();
 	$users = SWA_Helper::get_admin_users_for_blog( $blog_id );
 
-	if ( !empty( $users ) )
+	if ( ! empty( $users ) )
 		$users = $users[0]; //just the first user
 	return $users;
 }
@@ -46,4 +47,18 @@ function swa_scope_has_changed ( $new_scopes ) {
 	if ( $old_scope == $new_scopes )
 		return false;
 	return true;
+}
+
+
+function swa_activity_content_body( $word_count = 0 ) {
+	if( ! $word_count ) {
+		echo bp_get_activity_content_body();
+		return ;
+	}
+	
+	$content = strip_tags( strip_shortcodes( bp_get_activity_content_body() ) );
+	
+	$content = wp_trim_words( $content, $word_count );
+	
+	echo wpautop( $content );
 }

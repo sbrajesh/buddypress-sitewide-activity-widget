@@ -88,6 +88,7 @@ class BP_SWA_Widget extends WP_Widget {
 		<input type='hidden' name='show_post_form' id='swa_show_post_form' value="<?php echo $instance['show_post_form']; ?>" />
 		<input type='hidden' name='swa_scope' id='swa_scope' value="<?php echo $scope; ?>" />
 		<input type='hidden' name='swa-original-scope' id='swa-original-scope' value="<?php echo $scope; ?>" />
+		<input type='hidden' name='swa-activity-words-count' id='swa-activity-words-count' value="<?php echo  $instance['activity_words_count']; ?>" />
 
 		<?php echo $after_widget; ?>
 	<?php
@@ -120,6 +121,7 @@ class BP_SWA_Widget extends WP_Widget {
 		$instance['is_blog_admin_activity'] = $new_instance['is_blog_admin_activity'];
 		
 		$instance['is_personal'] = $new_instance['is_personal'];
+		$instance['activity_words_count'] = absint( $new_instance['activity_words_count'] );
 
 
 		return $instance;
@@ -142,7 +144,8 @@ class BP_SWA_Widget extends WP_Widget {
 			'show_activity_filters'		=> 'yes', 
 			'included_components'		=> false, 
 			'excluded_components'		=> false, 
-			'allow_comment'				=> 'no' 
+			'allow_comment'				=> 'no',
+			'activity_words_count'		=> 0,
 			
 			) );
 		
@@ -190,6 +193,13 @@ class BP_SWA_Widget extends WP_Widget {
 					<label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked( $show_activity_content, 0 ) ?> value="0" style="width: 10%" />No</label>
 
 				</label>
+			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id( 'activity_words_count' ); ?>"><?php _e( 'Limit activity content to:', 'swa' ); ?>
+					<input id="<?php echo $this->get_field_id( 'activity_words_count' ); ?>" name="<?php echo $this->get_field_name( 'activity_words_count' ); ?>" type="text" value="<?php echo absint( $activity_words_count ); ?>" class="widefat" /> <?php _e( 'words. Zero means no limit.' , 'swa' );?>
+				</label>
+					
+			
 			</p>
 			<p><label for="bp-swa-show-post-form"><strong><?php _e( 'Show Post Form', 'swa' ); ?></strong>
 					<label for="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_post_form' ); ?>" type="radio" <?php if ( $show_post_form == 'yes' ) echo "checked='checked'"; ?> value="yes" style="width: 10%" />Yes</label>

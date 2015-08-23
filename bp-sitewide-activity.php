@@ -100,9 +100,8 @@ class SWA_Helper {
 		$files = array(
 			'core/functions.php',
 			'core/template.php',
-			'ajax.php',
+			'core/ajax.php',
 			'core/widget.php',
-			'template-tags.php',
 		);
 		
 		foreach( $files as $file ) {

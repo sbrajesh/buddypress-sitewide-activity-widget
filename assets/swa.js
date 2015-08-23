@@ -33,6 +33,7 @@ jQuery(document).ready(function(){
         var is_personal = jq( "#swa_is_personal", local_scope ).val();
         var is_blog_admin_activity = jq( "#swa_is_blog_admin_activity", local_scope ).val();
         var show_post_form = jq( "#swa_show_post_form", local_scope ).val();
+        var activity_words_count = jq( "#swa-activity-words-count", local_scope ).val();
 
 
 
@@ -51,7 +52,8 @@ jQuery(document).ready(function(){
                 included_components: included_components,
                 excluded_components: excluded_components,
                 show_post_form: show_post_form,
-                original_scope: jq('#swa-original-scope').val()
+                original_scope: jq('#swa-original-scope').val(),
+				activity_words_count: activity_words_count
                 },
             
                 function(response){
@@ -115,7 +117,7 @@ jq(document).on('click', 'input#swa-whats-new-submit', function() {
         var object = '';
         var item_id = jq("#swa-whats-new-post-in",parent).val();
         var content = jq("textarea#swa-whats-new",parent).val();
-
+		 var activity_words_count = jq( "#swa-activity-words-count", parent ).val();
         /* Set object for non-profile posts */
         if ( item_id > 0 ) {
                 object = jq("#swa-whats-new-post-object",parent).val();
@@ -128,7 +130,8 @@ jq(document).on('click', 'input#swa-whats-new-submit', function() {
                 'content': content,
                 'object': object,
                 'item_id': item_id,
-                'show_avatar':show_avatar
+                'show_avatar':show_avatar,
+				activity_words_count: activity_words_count
         },
         function(response)
         {

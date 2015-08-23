@@ -23,7 +23,7 @@
 		<div id="swa-whats-new-options">
 			
 
-			<?php if ( function_exists('bp_has_groups') && !bp_is_my_profile() && !bp_is_group() ) : ?>
+			<?php if ( function_exists('bp_has_groups') && ! bp_is_my_profile() && ! bp_is_group() ) : ?>
 				<div id="swa-whats-new-post-in-box">
 					<?php _e( 'Post in', 'buddypress' ) ?>:
 
