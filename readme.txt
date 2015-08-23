@@ -32,7 +32,7 @@ The plugin is simple to install:
 1. Download `buddypress-sitewide-activity-widget.zip`
 1. Unzip
 1. Upload `buddypress-sitewide-activity-widget` directory to your `/wp-content/plugins` directory
-1. Go to the plugin management page and enable the plugin "Buddypress Sitewide Activity widget", Activate the plugin sitewide if you want to use it sitewide.
+1. Go to the plugin management page and enable the plugin "BuddyPress Sitewide Activity widget", Activate the plugin sitewide if you want to use it sitewide.
 
 Otherwise, Use the Plugin browser, upload it and activate, you are done.
 == Frequently Asked Questions ==
@@ -41,9 +41,11 @@ Add the widget "Site Wide Activity" and save the settings in the widget. That's 
 = Component filters are not shown horizontal =
 
 
-For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-update-buddypress-1-9-buddypress-2-0/](http://buddydev.com/buddypress/buddypress-sitewide-activity-widget-for-buddypress-1-2-and-above/ "BuddyPress Sitewide Activity Plugin page")
+For support, please use [BuddyDev Support Forum](http://buddydev.com/support/forums/ "BuddyDev support forums")
 == Changelog == 
-
+ = Version 1.3.0 =
+ * Code refactoring( mostly )
+ * Added option to limit the content length of shown activity
  = Version 1.2 =
  * Major rewrite for BuddyPress 1.8+( tested with BuddyPress 2.0 beta 1)
  = Version 1.1.7 =
@@ -67,4 +69,4 @@ For more, please visit  [http://buddydev.com/buddypress/buddypress-sitewide-acti
 
 == Other ==
 
-For more info, please visit us at [BuddyDev.com](http://buddydev.com/ "The best place for all BuddyPress based plugins, themes tutorials")
+For support, please use [BuddyDev Support Forum](http://buddydev.com/support/forums/ "BuddyDev support forums")
