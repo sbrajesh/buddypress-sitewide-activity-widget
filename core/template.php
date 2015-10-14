@@ -70,7 +70,13 @@ function swa_get_activity_filter_links ( $args = false ) {
 			__( 'blogs', 'swa' ) 
 		);
 
-		$component_links[] = $before . '<a href="' . esc_attr( $link ) . '">' . ucwords( __( $component, 'swa' ) ) . '</a>' . $after;
+		$label = ucwords( __( $component, 'swa' ) );
+		
+		if( $component == 'bbpress' ) {
+			$label = __( 'Forums', 'swa' );
+		}
+		
+		$component_links[] = $before . '<a href="' . esc_attr( $link ) . '">' . $label . '</a>' . $after;
 	}
 
 	if ( ! empty( $_REQUEST['scope'] ) && swa_scope_has_changed( $_REQUEST['scope'] ) ) {
@@ -152,15 +158,28 @@ function bp_swa_list_activities ( $args ) {
 
 		<?php if ( $show_filters == 'yes' ): ?>
 			
-	<ul id="activity-filter-links" class="swa-clearfix">
+			<ul id="activity-filter-links" class="swa-clearfix">
 				<?php swa_activity_filter_links( 'scope=' . $scope . '&include=' . $included . '&exclude=' . $excluded ); ?>
 			</ul>
 			
 			<div class="clear"></div>
 		
 		<?php endif; ?>
-
-		<?php if ( bp_has_activities( 'type=sitewide&max=' . $max . '&page=' . $page . '&per_page=' . $per_page . '&object=' . $scope . "&user_id=" . $user_id . "&primary_id=" . $primary_id . '&scope=0' ) ) : ?>
+		<?php
+			$params = array(
+				'type'			=> 'sitewide',
+				'max'			=> $max,
+				'page'			=> $page,
+				'per_page'		=> $per_page,
+				'object'		=> $scope,
+				'user_id'		=> $user_id,
+				'primary_id'	=> $primary_id,
+				'scope'			=> 0,
+				'count_total'	=> true, //always count total
+			);
+			
+		?>
+		<?php if ( bp_has_activities(   $params ) ) : ?>
 
 			<div class="swa-pagination swa-clearfix">
 				<div class="pag-count" id="activity-count">
