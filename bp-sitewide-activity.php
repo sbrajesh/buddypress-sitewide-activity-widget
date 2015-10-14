@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Plugin Name: Buddypress Sitewide Activity Widget
+ * Plugin Name: BuddyPress Sitewide Activity Widget
  * Plugin URI: http://buddydev.com/plugins/buddypress-sitewide-activity-widget/
- * Version: 1.3.0
- * Author: Brajesh Singh( BuddyDev.com )
+ * Version: 1.3.1
+ * Author: Brajesh Singh(BuddyDev.com)
  * Author IRI: http://buddydev.com
  * 
- * Description: Sitewide activity widget for BuddyPress.
+ * Description: Power packed, customizable Sitewide activity widget for BuddyPress. 
  * 
  * 
  */

@@ -1,20 +1,20 @@
-=== Buddypress Sitewide Activity Widget ===
-Contributors: sbrajesh, buddydev
-Donate link: http://buddydev.com/donate/
+=== BuddyPress Sitewide Activity Widget ===
+Contributors: buddydev, sbrajesh
 Tags: buddypress, buddypress activity, sitewide activity, sitewide activity widget, buddypress sitewide activity widget
 Requires at least: BuddyPress 2.0
-Tested up to: BuddyPress 2.3.2.1
-Stable tag: 1.3.0
+Tested up to: BuddyPress 2.3.4
+Stable tag: 1.3.1
 
-Buddypress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you.
+BuddyPress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you.
+
 == Description ==
-Buddypress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you. Now you can show the BuddyPress activity in a widget area.
+BuddyPress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you. Now you can show the BuddyPress activity in a widget area.
 
 Features include:
 
-* Filter By components in UI
+* Filter Activities By components in UI
 * Limit per page and max
-* Support for post activity from swa widget
+* Support for posting activity from swa widget
 * Support for blog admins activity only
 * Support for logged in users activity only
 * Show hide avatars
@@ -24,6 +24,8 @@ Features include:
 * Multi instance
 * easily themable, should not conflict
 * localizable
+
+For support, please use [BuddyDev Support Forum](http://buddydev.com/support/forums/ "BuddyDev support forums")
 
 == Installation ==
 
@@ -42,16 +44,25 @@ Add the widget "Site Wide Activity" and save the settings in the widget. That's 
 
 
 For support, please use [BuddyDev Support Forum](http://buddydev.com/support/forums/ "BuddyDev support forums")
+
 == Changelog == 
+ = Version 1.3.0 =
+ * Fix total count
+ * Fix label for bbpress, It is now Forums
+
  = Version 1.3.0 =
  * Code refactoring( mostly )
  * Added option to limit the content length of shown activity
+
  = Version 1.2 =
  * Major rewrite for BuddyPress 1.8+( tested with BuddyPress 2.0 beta 1)
+
  = Version 1.1.7 =
  * Updated for BuddyPress 1.7+ compatibility
+
  = Version 1.1.3.3 =
  * Updates for BuddyPress 1.5 compatibility
+
  = Version 1.1 =
  * Support for post activity from swa widget
  * Support for blog admins activity only
@@ -63,6 +74,7 @@ For support, please use [BuddyDev Support Forum](http://buddydev.com/support/for
  * Multi instance
  * easily themabale, should not conflict
  * localizable
+
  = Version 1.0 =
 *Initial release
 
