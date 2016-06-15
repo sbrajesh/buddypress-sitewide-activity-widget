@@ -63,18 +63,18 @@ function swa_get_activity_filter_links ( $args = false ) {
 
 		/* Make sure all core internal component names are translatable */
 		$translatable_components = array( 
-			__( 'profile', 'swa' ),
-			__( 'friends', 'swa' ),
-			__( 'groups', 'swa' ), 
-			__( 'status', 'swa' ), 
-			__( 'blogs', 'swa' ) 
+			'profile'	=> __( 'Profile', 'buddypress-sitewide-activity-widget' ),
+			'xprofile'	=> __( 'Profile', 'buddypress-sitewide-activity-widget' ),
+			'friends'	=> __( 'Friends', 'buddypress-sitewide-activity-widget' ),
+			'groups'	=> __( 'Groups', 'buddypress-sitewide-activity-widget' ), 
+			'status'	=> __( 'Status', 'buddypress-sitewide-activity-widget' ), 
+			'blogs'		=> __( 'Blogs', 'buddypress-sitewide-activity-widget' ),
+			'forums'	=> __( 'Forums', 'buddypress-sitewide-activity-widget'),
+			'bbpress'	=> __( 'Forums', 'buddypress-sitewide-activity-widget'),
+			
 		);
 
-		$label = ucwords( __( $component, 'swa' ) );
-		
-		if( $component == 'bbpress' ) {
-			$label = __( 'Forums', 'swa' );
-		}
+		$label = isset( $translatable_components[ $component ] )? $translatable_components[ $component ] : ucwords(  $component );
 		
 		$component_links[] = $before . '<a href="' . esc_attr( $link ) . '">' . $label . '</a>' . $after;
 	}
@@ -84,7 +84,7 @@ function swa_get_activity_filter_links ( $args = false ) {
 		$link = esc_url( remove_query_arg( 'afilter', $link ) );
 		$link = $link . "?afilter=";
 
-		$component_links[] = "<{$tag} id='afilter-clear'><a href='" . esc_attr( $link ) . "'>" . __( 'Clear Filter', 'swa' ) . "</a></{$tag}>";
+		$component_links[] = "<{$tag} id='afilter-clear'><a href='" . esc_attr( $link ) . "'>" . __( 'Clear Filter', 'buddypress-sitewide-activity-widget' ) . "</a></{$tag}>";
 	}
 
 
@@ -149,7 +149,7 @@ function bp_swa_list_activities ( $args ) {
 	
 	?>
 	
-<div class='swa-wrap'>
+	<div class='swa-wrap'>
 		<?php
 			if ( is_user_logged_in() && $show_post_form == 'yes' ) {
 				swa_show_post_form();
@@ -159,7 +159,18 @@ function bp_swa_list_activities ( $args ) {
 		<?php if ( $show_filters == 'yes' ): ?>
 			
 			<ul id="activity-filter-links" class="swa-clearfix">
-				<?php swa_activity_filter_links( 'scope=' . $scope . '&include=' . $included . '&exclude=' . $excluded ); ?>
+				<?php
+
+					$args = array(
+						'scope' => $scope,
+						'include' => $included,
+						'exclude' => $excluded
+
+					);
+
+					swa_activity_filter_links( $args );
+
+				?>
 			</ul>
 			
 			<div class="clear"></div>
@@ -207,10 +218,11 @@ function bp_swa_list_activities ( $args ) {
 
 			<div class="widget-error">
 				<?php
+
 					if ( $is_personal == 'yes' ) {
-						$error = sprintf( __( 'You have no recent %s activity.', 'swa' ), $scope );
+						$error = sprintf( __( 'You have no recent %s activity.', 'buddypress-sitewide-activity-widget' ), $scope );
 					} else {
-						$error = __( 'There has been no recent site activity.', 'swa' );
+						$error = __( 'There has been no recent site activity.', 'buddypress-sitewide-activity-widget' );
 					}
 				?>
 				
@@ -232,7 +244,7 @@ function swa_activity_entry( $args ) {
 	
     $args = wp_parse_args( $args );
     extract( $args );
-    
+
 	$args['allow_comment'] = false;//we can provide an option in future to allow commenting
     ?>
  
@@ -240,7 +252,7 @@ function swa_activity_entry( $args ) {
     
 	<li class="<?php bp_activity_css_class() ?>" id="activity-<?php bp_activity_id() ?>">
 		
-        <?php if( $show_avatar == 'yes' ): ?>
+        <?php if( ! empty( $show_avatar ) && $show_avatar == 'yes' ): ?>
         
 			<div class="swa-activity-avatar">
 				<a href="<?php bp_activity_user_link() ?>">
@@ -259,7 +271,7 @@ function swa_activity_entry( $args ) {
 
 			</div>
 
-			<?php if ( bp_activity_has_content() && $args['show_activity_content'] ) : ?>
+			<?php if ( bp_activity_has_content() && isset( $args['show_activity_content'] ) ) : ?>
 
 				<div class="swa-activity-inner">
 					<?php swa_activity_content_body( $args['activity_words_count'] ) ?>
@@ -271,8 +283,8 @@ function swa_activity_entry( $args ) {
 			
 			<div class="swa-activity-meta">
 				
-				<?php if ( is_user_logged_in() && bp_activity_can_comment()&& $args['allow_comment'] ) : ?>
-						<a href="<?php bp_activity_comment_link() ?>" class="acomment-reply" id="acomment-comment-<?php bp_activity_id() ?>"><?php _e( 'Reply', 'swa' ) ?> (<span><?php bp_activity_comment_count() ?></span>)</a>
+				<?php if ( is_user_logged_in() && bp_activity_can_comment() && $args['allow_comment'] ) : ?>
+						<a href="<?php bp_activity_comment_link() ?>" class="acomment-reply" id="acomment-comment-<?php bp_activity_id() ?>"><?php _e( 'Reply', 'buddypress-sitewide-activity-widget' ) ?> (<span><?php bp_activity_comment_count() ?></span>)</a>
 				<?php endif; ?>
 
 				<?php do_action( 'bp_activity_entry_meta' ) ?>
@@ -284,13 +296,13 @@ function swa_activity_entry( $args ) {
 		<?php if ( 'activity_comment' == bp_get_activity_type() ) : ?>
 		
 			<div class="swa-activity-inreplyto">
-					<strong><?php _e( 'In reply to', 'swa' ) ?></strong> - <?php bp_activity_parent_content() ?> &middot;
-					<a href="<?php bp_activity_thread_permalink() ?>" class="view" title="<?php _e( 'View Thread / Permalink', 'swa' ) ?>"><?php _e( 'View', 'swa' ) ?></a>
+					<strong><?php _e( 'In reply to', 'buddypress-sitewide-activity-widget' ) ?></strong> - <?php bp_activity_parent_content() ?> &middot;
+					<a href="<?php bp_activity_thread_permalink() ?>" class="view" title="<?php _e( 'View Thread / Permalink', 'buddypress-sitewide-activity-widget' ) ?>"><?php _e( 'View', 'buddypress-sitewide-activity-widget' ) ?></a>
 			</div>
 		
 		<?php endif; ?>
 		
-		<?php if ( bp_activity_can_comment() && $args['show_activity_content'] ) : 
+		<?php if ( bp_activity_can_comment() && isset( $args['show_activity_content'] ) ) :
         
 			if( ! $args['allow_comment'] ) {
 				//hide reply link
@@ -302,7 +314,7 @@ function swa_activity_entry( $args ) {
 				
 				<?php bp_activity_comments() ?>
 				
-				<?php if ( is_user_logged_in() && $args['allow_comment'] ) : ?>
+				<?php if ( is_user_logged_in() && isset( $args['allow_comment'] ) ) : ?>
 				
 					<form action="<?php bp_activity_comment_form_action() ?>" method="post" id="swa-ac-form-<?php bp_activity_id() ?>" class="swa-ac-form"<?php bp_activity_comment_form_nojs_display() ?>>
 						
@@ -314,13 +326,14 @@ function swa_activity_entry( $args ) {
 								<textarea id="swa-ac-input-<?php bp_activity_id() ?>" class="ac-input" name="ac_input_<?php bp_activity_id() ?>"></textarea>
 							</div>
 							
-							<input type="submit" name="swa_ac_form_submit" value="<?php _e( 'Post', 'swa' ) ?> &rarr;" /> &nbsp; <?php _e( 'or press esc to cancel.', 'buddypress' ) ?>
+							<input type="submit" name="swa_ac_form_submit" value="<?php _e( 'Post', 'buddypress-sitewide-activity-widget' ) ?> &rarr;" /> &nbsp; <?php _e( 'or press esc to cancel.', 'buddypress-sitewide-activity-widget' ) ?>
 							<input type="hidden" name="comment_form_id" value="<?php bp_activity_id() ?>" />
 						</div>
 						
 						<?php wp_nonce_field( 'new_activity_comment', '_wpnonce_new_activity_comment' ) ?>
 					</form>
-				<?php endif; ?>
+
+				<?php   endif; ?>
 				
 			</div>
 		

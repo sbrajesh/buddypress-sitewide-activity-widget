@@ -61,7 +61,7 @@ function swa_post_update () {
 	}
 
 	if ( empty( $_POST['content'] ) ) {
-		echo '-1<div id="message" class="error"><p>' . __( 'Please enter some content to post.', 'swa' ) . '</p></div>';
+		echo '-1<div id="message" class="error"><p>' . __( 'Please enter some content to post.', 'buddypress-sitewide-activity-widget' ) . '</p></div>';
 		return false;
 	}
 
@@ -74,7 +74,7 @@ function swa_post_update () {
 		$activity_id = apply_filters( 'bp_activity_custom_update', $_POST['object'], $_POST['item_id'], $_POST['content'] );
 
 	if ( !$activity_id ) {
-		echo '-1<div id="message" class="error"><p>' . __( 'There was a problem posting your update, please try again.', 'swa' ) . '</p></div>';
+		echo '-1<div id="message" class="error"><p>' . __( 'There was a problem posting your update, please try again.', 'buddypress-sitewide-activity-widget' ) . '</p></div>';
 		return false;
 	}
 	$show_avatar = isset( $_POST["show_avatar"] ) ? $_POST["show_avatar"] : "no";

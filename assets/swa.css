@@ -1,8 +1,16 @@
 
 .swa-wrap{width:100%;}
+.swa-clearfix:before,
+.swa-clearfix:after{
+	content: " ";
+	display: table;
+}
+.swa-clearfix:after {
+	clear: both;
+}
 .swa-wrap .clear {clear:both;}
 .swa-wrap ul#activity-filter-links{}
-.swa-wrap ul#activity-filter-links li{float:left;padding:10px;}
+.swa-wrap ul#activity-filter-links li{float:left;padding:10px;list-style: none;}
 .swa-wrap ul#activity-filter-links a {}
 .swa-wrap ul#activity-filter-links li.selected a {font-weight:bold;}
 .swa-wrap div.swa-pagination {
