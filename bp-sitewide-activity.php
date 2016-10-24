@@ -85,10 +85,8 @@ class SWA_Helper {
 		add_action( 'bp_enqueue_scripts', array( $this, 'load_css' ) );
 		//load admin css on widgets.php
 		add_action( 'admin_print_styles-widgets.php', array( $this, 'load_admin_css' ) );
-		
-		
-		$this->load_textdomain();
-		
+
+		add_action( 'bp_init', array( $this, 'load_textdomain' ) );
 	}
 	
 	/**
