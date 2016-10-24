@@ -96,10 +96,10 @@ class SWA_Helper {
 	public function load() {
 		
 		$files = array(
-			'core/functions.php',
-			'core/template.php',
-			'core/ajax.php',
-			'core/widget.php',
+			'core/swa-functions.php',
+			'core/swa-template.php',
+			'core/swa-ajax.php',
+			'core/swa-widget.php',
 		);
 		
 		foreach( $files as $file ) {
