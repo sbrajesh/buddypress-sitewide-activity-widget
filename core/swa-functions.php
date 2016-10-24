@@ -1,12 +1,20 @@
 <?php
-//locate and load activity post form
+/**
+ * Load the Widget Activity post form
+ */
 function swa_show_post_form () {
-	
 	include swa_helper()->get_path() . 'template/post-form.php'; //no inc_once because we may need form multiple times
 }
 
+/**
+ * Get an array of recorded components which contain $include and do not contain the components from $exclude
+ *
+ * @param array $include
+ * @param array $exclude
+ *
+ * @return array
+ */
 function swa_get_base_component_scope ( $include, $exclude ) {
-	/* Fetch the names of components that have activity recorded in the DB */
 	$components = swa_get_recorded_components();
 
 	if ( ! empty( $include ) ) {
@@ -20,8 +28,11 @@ function swa_get_base_component_scope ( $include, $exclude ) {
 	return $components;
 }
 
-//helper function, return the single admin of this blog ok ok ok
-
+/**
+ * Get the Id of the admin(Any one of the admin) of current blog
+ *
+ * @return int
+ */
 function swa_get_blog_admin_id () {
 
 	$blog_id = get_current_blog_id();
@@ -34,6 +45,11 @@ function swa_get_blog_admin_id () {
 	return $users;
 }
 
+/**
+ * Get an array of recorded components
+ *
+ * @return array
+ */
 function swa_get_recorded_components () {
 
 	$components = BP_Activity_Activity::get_recorded_components();
@@ -41,6 +57,13 @@ function swa_get_recorded_components () {
 	return array_diff( (array) $components, array( 'members' ) );
 }
 
+/**
+ * Check if the given request has scope changed?
+ *
+ * @param $new_scopes
+ *
+ * @return bool
+ */
 function swa_scope_has_changed ( $new_scopes ) {
 
 	$old_scope = $_REQUEST['original_scope'];
@@ -56,10 +79,14 @@ function swa_scope_has_changed ( $new_scopes ) {
 	return true;
 }
 
-
+/**
+ * Output the content body of an activity
+ *
+ * @param int $word_count how may words to limit
+ */
 function swa_activity_content_body( $word_count = 0 ) {
 	
-	if( ! $word_count ) {
+	if ( ! $word_count ) {
 		echo bp_get_activity_content_body();
 		return ;
 	}
