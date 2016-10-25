@@ -1,23 +1,34 @@
 <?php
-
-function swa_activity_filter_links ( $args = false ) {
-	//copy of bp_activity_filter_link
+/**
+ * Display Filterable links for activity
+ *
+ * based on bp_activity_filter_link
+ *
+ * @param array $args
+ */
+function swa_activity_filter_links ( $args = array() ) {
 	echo swa_get_activity_filter_links( $args );
 }
 
-function swa_get_activity_filter_links ( $args = false ) {
+/**
+ * Get filter links for activity
+ *
+ * @param array $args
+ *
+ * @return bool|mixed|void
+ */
+function swa_get_activity_filter_links ( $args = array() ) {
 
 	$link = '';
 	$defaults = array(
 		'style' => 'list'
 	);
-	//check scope, if not single entiry
+	//check scope, if not single entry
 
 	$r = wp_parse_args( $args, $defaults );
 	extract( $r, EXTR_SKIP );
 
-	$components = swa_get_base_component_scope( $include, $exclude );
-
+	$components = swa_get_base_component_scope( $args['include'], $args['exclude'] );
 
 	if ( ! $components ) {
 		return false;
@@ -34,11 +45,10 @@ function swa_get_activity_filter_links ( $args = false ) {
 		} else {
 			$selected = '';
 		}
-		
-		
+
 		$component = esc_attr( $component );
 		
-		switch ( $style ) {
+		switch ( $args['style'] ) {
 			case 'list':
 				$tag = 'li';
 				$before = '<li id="afilter-' . $component . '"' . $selected . '>';
@@ -87,7 +97,6 @@ function swa_get_activity_filter_links ( $args = false ) {
 		$component_links[] = "<{$tag} id='afilter-clear'><a href='" . esc_attr( $link ) . "'>" . __( 'Clear Filter', 'buddypress-sitewide-activity-widget' ) . "</a></{$tag}>";
 	}
 
-
 	if ( ! empty( $component_links ) ) {
 		return apply_filters( 'swa_get_activity_filter_links', implode( "\n", $component_links ), $component_links );
 	}
@@ -97,6 +106,7 @@ function swa_get_activity_filter_links ( $args = false ) {
 
 /**
  * List Activities
+ *
  */
 function bp_swa_list_activities ( $args ) {
 
@@ -131,15 +141,15 @@ function bp_swa_list_activities ( $args ) {
 
 	$user_id = false; //for limiting to users
 
-	if ( $is_personal == 'yes' ) {
+	if ( $args['is_personal'] == 'yes' ) {
 		$user_id = get_current_user_id();
-	} elseif ( $is_blog_admin_activity == 'yes' ) {
+	} elseif ( $args['is_blog_admin_activity'] == 'yes' ) {
 		$user_id = swa_get_blog_admin_id();
 	} elseif ( bp_is_user() ) {
 		$user_id = null;
 	}
 
-	$components_scope = swa_get_base_component_scope( $included, $excluded );
+	$components_scope = swa_get_base_component_scope( $args['included'], $args['excluded'] );
 
 	$components_base_scope = '';
 
@@ -151,25 +161,23 @@ function bp_swa_list_activities ( $args ) {
 	
 	<div class='swa-wrap'>
 		<?php
-			if ( is_user_logged_in() && $show_post_form == 'yes' ) {
+			if ( is_user_logged_in() && $args['show_post_form'] == 'yes' ) {
 				swa_show_post_form();
 			}
 		?>
 
-		<?php if ( $show_filters == 'yes' ): ?>
+		<?php if ( $args['show_filters'] == 'yes' ): ?>
 			
 			<ul id="activity-filter-links" class="swa-clearfix">
 				<?php
 
 					$args = array(
-						'scope' => $scope,
-						'include' => $included,
-						'exclude' => $excluded
-
+						'scope'     => $args['scope'],
+						'include'   => $args['included'],
+						'exclude'   => $args['excluded'],
 					);
 
 					swa_activity_filter_links( $args );
-
 				?>
 			</ul>
 			
@@ -179,10 +187,10 @@ function bp_swa_list_activities ( $args ) {
 		<?php
 			$params = array(
 				'type'			=> 'sitewide',
-				'max'			=> $max,
-				'page'			=> $page,
-				'per_page'		=> $per_page,
-				'object'		=> $scope,
+				'max'			=> $args['max'],
+				'page'			=> $args['page'],
+				'per_page'		=> $args['per_page'],
+				'object'		=> $args['scope'],
 				'user_id'		=> $user_id,
 				'primary_id'	=> $primary_id,
 				'scope'			=> 0,
@@ -203,7 +211,6 @@ function bp_swa_list_activities ( $args ) {
 				<div class="clear" ></div>
 			</div>
 
-
 			<div class="clear" ></div>
 
 			<ul  class="site-wide-stream swa-activity-list swa-clearfix">
@@ -219,7 +226,7 @@ function bp_swa_list_activities ( $args ) {
 			<div class="widget-error">
 				<?php
 
-					if ( $is_personal == 'yes' ) {
+					if ( $args['is_personal'] == 'yes' ) {
 						$error = sprintf( __( 'You have no recent %s activity.', 'buddypress-sitewide-activity-widget' ), $scope );
 					} else {
 						$error = __( 'There has been no recent site activity.', 'buddypress-sitewide-activity-widget' );
@@ -238,7 +245,7 @@ function bp_swa_list_activities ( $args ) {
 /**
  * Individual activity entry
  * 
- * @param type $args
+ * @param array $args
  */
 function swa_activity_entry( $args ) {
 	
@@ -252,7 +259,7 @@ function swa_activity_entry( $args ) {
     
 	<li class="<?php bp_activity_css_class() ?>" id="activity-<?php bp_activity_id() ?>">
 		
-        <?php if( ! empty( $show_avatar ) && $show_avatar == 'yes' ): ?>
+        <?php if ( ! empty( $show_avatar ) && $show_avatar == 'yes' ): ?>
         
 			<div class="swa-activity-avatar">
 				<a href="<?php bp_activity_user_link() ?>">
@@ -266,9 +273,7 @@ function swa_activity_entry( $args ) {
         <div class="swa-activity-content swa-clearfix">
 		
 			<div class="swa-activity-header">
-
 				<?php bp_activity_action() ?>
-
 			</div>
 
 			<?php if ( bp_activity_has_content() && isset( $args['show_activity_content'] ) ) : ?>
@@ -304,7 +309,7 @@ function swa_activity_entry( $args ) {
 		
 		<?php if ( bp_activity_can_comment() && isset( $args['show_activity_content'] ) ) :
         
-			if( ! $args['allow_comment'] ) {
+			if ( ! $args['allow_comment'] ) {
 				//hide reply link
 				add_filter( 'bp_activity_can_comment_reply', '__return_false' );
 			}
@@ -338,7 +343,7 @@ function swa_activity_entry( $args ) {
 			</div>
 		
 			<?php 
-				if( ! $args['allow_comment'] ) {
+				if ( ! $args['allow_comment'] ) {
 					//remove filter
 					remove_filter( 'bp_activity_can_comment_reply', '__return_false' );
 				}
