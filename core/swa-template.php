@@ -21,7 +21,9 @@ function swa_get_activity_filter_links ( $args = array() ) {
 
 	$link = '';
 	$defaults = array(
-		'style' => 'list'
+		'style'     => 'list',
+        'before'    => '',
+        'after'     => '',
 	);
 	//check scope, if not single entry
 
@@ -48,7 +50,7 @@ function swa_get_activity_filter_links ( $args = array() ) {
 
 		$component = esc_attr( $component );
 		
-		switch ( $args['style'] ) {
+		switch ( $r['style'] ) {
 			case 'list':
 				$tag = 'li';
 				$before = '<li id="afilter-' . $component . '"' . $selected . '>';
@@ -86,7 +88,7 @@ function swa_get_activity_filter_links ( $args = array() ) {
 
 		$label = isset( $translatable_components[ $component ] )? $translatable_components[ $component ] : ucwords(  $component );
 		
-		$component_links[] = $before . '<a href="' . esc_attr( $link ) . '">' . $label . '</a>' . $after;
+		$component_links[] = $r['before'] . '<a href="' . esc_attr( $link ) . '">' . $label . '</a>' . $r['after'];
 	}
 
 	if ( ! empty( $_REQUEST['scope'] ) && swa_scope_has_changed( $_REQUEST['scope'] ) ) {
@@ -125,7 +127,7 @@ function bp_swa_list_activities ( $args ) {
 	);
 
 	$args = wp_parse_args( $args, $defaults );
-	extract( $args );
+	//extract( $args );
 
 	//check for the scope of activity
 	//is it the activity of logged in user/blog admin
@@ -156,7 +158,7 @@ function bp_swa_list_activities ( $args ) {
 	if ( ! empty( $components_scope ) ) {
 		$components_base_scope = join( ',', $components_scope );
 	}
-	
+
 	?>
 	
 	<div class='swa-wrap'>
@@ -164,6 +166,7 @@ function bp_swa_list_activities ( $args ) {
 			if ( is_user_logged_in() && $args['show_post_form'] == 'yes' ) {
 				swa_show_post_form();
 			}
+
 		?>
 
 		<?php if ( $args['show_filters'] == 'yes' ): ?>
@@ -171,13 +174,13 @@ function bp_swa_list_activities ( $args ) {
 			<ul id="activity-filter-links" class="swa-clearfix">
 				<?php
 
-					$args = array(
+					$filter_args = array(
 						'scope'     => $args['scope'],
 						'include'   => $args['included'],
 						'exclude'   => $args['excluded'],
 					);
 
-					swa_activity_filter_links( $args );
+					swa_activity_filter_links( $filter_args );
 				?>
 			</ul>
 			
@@ -185,6 +188,7 @@ function bp_swa_list_activities ( $args ) {
 		
 		<?php endif; ?>
 		<?php
+		
 			$params = array(
 				'type'			=> 'sitewide',
 				'max'			=> $args['max'],
