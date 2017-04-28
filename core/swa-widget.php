@@ -160,35 +160,35 @@ class BP_SWA_Widget extends WP_Widget {
 		<div class="swa-widgte-block">
 			<p>
 				<label for="bp-swa-is-personal"><strong><?php _e( "Limit to Logged In user's activity:", 'buddypress-sitewide-activity-widget' ); ?></strong>
-					<label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php checked( $instance['is_personal'], 'yes' ) ?> value="yes" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'is_personal' ); ?>_no" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php checked( $instance['is_personal'], 'no' ) ?> value="no" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php checked( $instance['is_personal'], 'yes' ) ?> value="yes" " />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'is_personal' ); ?>_no" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php checked( $instance['is_personal'], 'no' ) ?> value="no"  />No</label>
 
 				</label>
 			</p>
 			<p>
 				<label for="bp-swa-is-blog-admin-activity"><strong><?php _e( "List My Activity Only:", 'buddypress-sitewide-activity-widget' ); ?></strong>
-					<label for="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_yes" name="<?php echo $this->get_field_name( 'is_blog_admin_activity' ); ?>" type="radio" <?php checked( $instance['is_blog_admin_activity'], 'yes' ) ?> value="yes" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_no" name="<?php echo $this->get_field_name( 'is_blog_admin_activity' ); ?>" type="radio" <?php checked( $instance['is_blog_admin_activity'], 'no' ); ?> value="no" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_yes" name="<?php echo $this->get_field_name( 'is_blog_admin_activity' ); ?>" type="radio" <?php checked( $instance['is_blog_admin_activity'], 'yes' ) ?> value="yes"  />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'is_blog_admin_activity' ); ?>_no" name="<?php echo $this->get_field_name( 'is_blog_admin_activity' ); ?>" type="radio" <?php checked( $instance['is_blog_admin_activity'], 'no' ); ?> value="no"  />No</label>
 				</label>
 			</p>
 		</div>
 		<div class="swa-widgte-block">
 			<p>
 				<label for="bp-swa-show-avatar"><strong><?php _e( 'Show Avatar:', 'buddypress-sitewide-activity-widget' ); ?></strong>
-					<label for="<?php echo $this->get_field_id( 'show_avatar' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_avatar' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" type="radio" <?php checked( $instance['show_avatar'], 'yes' ); ?> value="yes" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'show_avatar' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_avatar' ); ?>_no" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" type="radio" <?php checked( $instance['show_avatar'], 'no' ); ?> value="no" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'show_avatar' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_avatar' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" type="radio" <?php checked( $instance['show_avatar'], 'yes' ); ?> value="yes"  />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'show_avatar' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_avatar' ); ?>_no" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" type="radio" <?php checked( $instance['show_avatar'], 'no' ); ?> value="no"  />No</label>
 				</label>
 			</p>
 			<p>
 				<label for="bp-swa-show-feed-link"><?php _e( 'Show Feed Link:', 'buddypress-sitewide-activity-widget' ); ?>
-					<label for="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_feed_link' ); ?>" type="radio" <?php checked( $instance['show_feed_link'], 'yes' ); ?> value="yes" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_no" name="<?php echo $this->get_field_name( 'show_feed_link' ); ?>" type="radio" <?php checked( $instance['show_feed_link'] , 'no' ); ?> value="no" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_feed_link' ); ?>" type="radio" <?php checked( $instance['show_feed_link'], 'yes' ); ?> value="yes"  />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_feed_link' ); ?>_no" name="<?php echo $this->get_field_name( 'show_feed_link' ); ?>" type="radio" <?php checked( $instance['show_feed_link'] , 'no' ); ?> value="no"  />No</label>
 				</label>
 			</p>
 			<p>
 				<label for="bp-swa-show-activity-content"><?php _e( 'Show Activity Content:', 'buddypress-sitewide-activity-widget' ); ?>
-					<label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked( $instance['show_activity_content'], 1 ) ?> value="1" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked( $instance['show_activity_content'], 0 ) ?> value="0" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked( $instance['show_activity_content'], 1 ) ?> value="1"  />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked( $instance['show_activity_content'], 0 ) ?> value="0" />No</label>
 				</label>
 			</p>
 			<p>
@@ -198,8 +198,8 @@ class BP_SWA_Widget extends WP_Widget {
 			</p>
 			<p>
 				<label for="bp-swa-show-post-form"><strong><?php _e( 'Show Post Form', 'buddypress-sitewide-activity-widget' ); ?></strong>
-					<label for="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_post_form' ); ?>" type="radio" <?php checked( $instance['show_post_form'], 'yes' ); ?> value="yes" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'show_post_form' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_post_form' ); ?>_no" name="<?php echo $this->get_field_name( 'show_post_form' ); ?>" type="radio" <?php checked( $instance['show_post_form'], 'no' ); ?> value="no" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_post_form' ); ?>" type="radio" <?php checked( $instance['show_post_form'], 'yes' ); ?> value="yes"  />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'show_post_form' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_post_form' ); ?>_no" name="<?php echo $this->get_field_name( 'show_post_form' ); ?>" type="radio" <?php checked( $instance['show_post_form'], 'no' ); ?> value="no"  />No</label>
 
 				</label>
 			</p>
@@ -211,8 +211,8 @@ class BP_SWA_Widget extends WP_Widget {
 			</p>-->
 			<p>
 				<label for="bp-swa-show-activity-filters"><strong><?php _e( 'Show Activity Filters:', 'buddypress-sitewide-activity-widget' ); ?></strong>
-					<label for="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_activity_filters' ); ?>" type="radio" <?php checked( $instance['show_activity_filters'], 'yes' ); ?> value="yes" style="width: 10%" />Yes</label>
-					<label for="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_filters' ); ?>" type="radio" <?php checked( $instance['show_activity_filters'], 'no' ); ?> value="no" style="width: 10%" />No</label>
+					<label for="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_activity_filters' ); ?>" type="radio" <?php checked( $instance['show_activity_filters'], 'yes' ); ?> value="yes"  />Yes</label>
+					<label for="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_filters' ); ?>" type="radio" <?php checked( $instance['show_activity_filters'], 'no' ); ?> value="no"  />No</label>
 				</label>
 			</p>
 
@@ -222,7 +222,7 @@ class BP_SWA_Widget extends WP_Widget {
 			<p> 
 				<?php $recorded_components = swa_get_recorded_components();?>
 				<?php foreach ( (array) $recorded_components as $component ):?>
-					<label for="<?php echo $this->get_field_id( 'included_components' ) . '_' . $component ?>" ><?php echo ucwords( $component ); ?> <input id="<?php echo $this->get_field_id( 'included_components' ) . '_' . $component ?>" name="<?php echo $this->get_field_name( 'included_components' ); ?>[]" type="checkbox" <?php if ( is_array( $included_components ) && in_array( $component, $included_components ) ) echo "checked='checked'"; ?> value="<?php echo $component; ?>" style="width: 10%" /></label>
+					<label for="<?php echo $this->get_field_id( 'included_components' ) . '_' . $component ?>" ><?php echo ucwords( $component ); ?> <input id="<?php echo $this->get_field_id( 'included_components' ) . '_' . $component ?>" name="<?php echo $this->get_field_name( 'included_components' ); ?>[]" type="checkbox" <?php if ( is_array( $included_components ) && in_array( $component, $included_components ) ) echo "checked='checked'"; ?> value="<?php echo $component; ?>" /></label>
 				<?php endforeach; ?>
 			</p>
 		</div>
@@ -232,7 +232,7 @@ class BP_SWA_Widget extends WP_Widget {
 			<p>
 				<?php  //$recorded_components = BP_Activity_Activity::get_recorded_components();?>
 				<?php foreach ( (array) $recorded_components as $component ): ?>
-					<label for="<?php echo $this->get_field_id( 'excluded_components' ) . '_' . $component ?>" ><?php echo ucwords( $component ); ?> <input id="<?php echo $this->get_field_id( 'excluded_components' ) . '_' . $component ?>" name="<?php echo $this->get_field_name( 'excluded_components' ); ?>[]" type="checkbox" <?php if ( is_array( $excluded_components ) && in_array( $component, $excluded_components ) ) echo "checked='checked'"; ?> value="<?php echo $component; ?>" style="width: 10%" /></label>
+					<label for="<?php echo $this->get_field_id( 'excluded_components' ) . '_' . $component ?>" ><?php echo ucwords( $component ); ?> <input id="<?php echo $this->get_field_id( 'excluded_components' ) . '_' . $component ?>" name="<?php echo $this->get_field_name( 'excluded_components' ); ?>[]" type="checkbox" <?php if ( is_array( $excluded_components ) && in_array( $component, $excluded_components ) ) echo "checked='checked'"; ?> value="<?php echo $component; ?>"  /></label>
 				<?php endforeach; ?>
 			</p>
 		</div>
