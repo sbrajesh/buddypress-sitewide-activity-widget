@@ -139,7 +139,9 @@ jQuery( document ).ready( function () {
 			object:						object,
 			item_id:					item_id,
 			show_avatar:				show_avatar,
-			activity_words_count:		activity_words_count
+			activity_words_count:		activity_words_count,
+			show_content:				jq('#swa_show_content').val(),
+			allow_comment:				jq('#swa-activity-allow-comment').val()
 		},
 		function ( response )
 		{
@@ -219,7 +221,7 @@ jQuery( document ).ready( function () {
 				form.addClass( 'root' );
 
 			form.slideDown( 200 );
-			jq.scrollTo( form, 500, { offset: -100, easing: 'easeOutQuad' } );
+			jq.scrollTo( form, 500, { offset: -100, easing:'swing' } );
 			jq( '#swa-ac-form-' + ids[2] + ' textarea' ).focus();
 
 			return false;

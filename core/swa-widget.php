@@ -83,6 +83,7 @@ class BP_SWA_Widget extends WP_Widget {
 		<input type='hidden' name='swa_scope' id='swa_scope' value="<?php echo $scope; ?>" />
 		<input type='hidden' name='swa-original-scope' id='swa-original-scope' value="<?php echo $scope; ?>" />
 		<input type='hidden' name='swa-activity-words-count' id='swa-activity-words-count' value="<?php echo  $instance['activity_words_count']; ?>" />
+		<input type='hidden' name='swa-activity-allow-comment' id='swa-activity-allow-comment' value="<?php echo  $instance['allow_comment']; ?>" />
 
 		<?php echo $args['after_widget']; ?>
 	<?php
@@ -108,6 +109,7 @@ class BP_SWA_Widget extends WP_Widget {
 		$instance['show_post_form'] = $new_instance['show_post_form']; //should we show the post form or not
 		
 		$instance['show_activity_content'] = $new_instance['show_activity_content'];
+		$instance['allow_comment'] = absint( $new_instance['allow_comment'] );
 
 		$instance['included_components'] = $new_instance['included_components'];
 		$instance['excluded_components'] = $new_instance['excluded_components'];
@@ -131,7 +133,8 @@ class BP_SWA_Widget extends WP_Widget {
 			'is_personal'				=> 'no', 
 			'is_blog_admin_activity'	=> 'no', 
 			'show_avatar'				=> 'yes', 
-			'show_activity_content'		=> 1, 
+			'show_activity_content'		=> 1,
+			'allow_comment'             => 1,
 			'show_feed_link'			=> 'yes', 
 			'show_post_form'			=> 'no', 
 			'allow_reply'				=> 'no', 
@@ -191,11 +194,13 @@ class BP_SWA_Widget extends WP_Widget {
 					<label for="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'show_activity_content' ); ?>_no" name="<?php echo $this->get_field_name( 'show_activity_content' ); ?>" type="radio" <?php echo checked( $instance['show_activity_content'], 0 ) ?> value="0" />No</label>
 				</label>
 			</p>
+
 			<p>
 				<label for="<?php echo $this->get_field_id( 'activity_words_count' ); ?>"><?php _e( 'Limit activity content to:', 'buddypress-sitewide-activity-widget' ); ?>
 					<input id="<?php echo $this->get_field_id( 'activity_words_count' ); ?>" name="<?php echo $this->get_field_name( 'activity_words_count' ); ?>" type="text" value="<?php echo absint( $instance['activity_words_count'] ); ?>" class="widefat" /> <?php _e( 'words. Zero means no limit.' , 'buddypress-sitewide-activity-widget' );?>
 				</label>
 			</p>
+
 			<p>
 				<label for="bp-swa-show-post-form"><strong><?php _e( 'Show Post Form', 'buddypress-sitewide-activity-widget' ); ?></strong>
 					<label for="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_post_form' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_post_form' ); ?>" type="radio" <?php checked( $instance['show_post_form'], 'yes' ); ?> value="yes"  />Yes</label>
@@ -209,6 +214,12 @@ class BP_SWA_Widget extends WP_Widget {
 
 				 </label>
 			</p>-->
+            <p>
+                <label for="bp-swa-show-activity-content"><?php _e( 'Show/Allow Activity Replies:', 'buddypress-sitewide-activity-widget' ); ?>
+                    <label for="<?php echo $this->get_field_id( 'allow_comment' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'allow_comment' ); ?>_yes" name="<?php echo $this->get_field_name( 'allow_comment' ); ?>" type="radio" <?php echo checked( $instance['allow_comment'], 1 ) ?> value="1"  />Yes</label>
+                    <label for="<?php echo $this->get_field_id( 'allow_comment' ); ?>_no" > <input  id="<?php echo $this->get_field_id( 'allow_comment' ); ?>_no" name="<?php echo $this->get_field_name( 'allow_comment' ); ?>" type="radio" <?php echo checked( $instance['allow_comment'], 0 ) ?> value="0" />No</label>
+                </label>
+            </p>
 			<p>
 				<label for="bp-swa-show-activity-filters"><strong><?php _e( 'Show Activity Filters:', 'buddypress-sitewide-activity-widget' ); ?></strong>
 					<label for="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_activity_filters' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_activity_filters' ); ?>" type="radio" <?php checked( $instance['show_activity_filters'], 'yes' ); ?> value="yes"  />Yes</label>

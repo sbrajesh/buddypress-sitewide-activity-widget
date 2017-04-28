@@ -253,10 +253,12 @@ function bp_swa_list_activities ( $args ) {
  */
 function swa_activity_entry( $args ) {
 	
-    $args = wp_parse_args( $args );
+    $args = wp_parse_args( $args , array(
+            'allow_comment'=> true,
+    ));
     extract( $args );
 
-	$args['allow_comment'] = false;//we can provide an option in future to allow commenting
+	//$args['allow_comment'] = false;//we can provide an option in future to allow commenting
 	$args['show_activity_content'] = absint( $args['show_activity_content'] );
     ?>
  
@@ -322,7 +324,7 @@ function swa_activity_entry( $args ) {
 				
 				<?php bp_activity_comments() ?>
 				
-				<?php if ( is_user_logged_in() && isset( $args['allow_comment'] ) ) : ?>
+				<?php if ( is_user_logged_in() && ! empty( $args['allow_comment'] ) ) : ?>
 				
 					<form action="<?php bp_activity_comment_form_action() ?>" method="post" id="swa-ac-form-<?php bp_activity_id() ?>" class="swa-ac-form"<?php bp_activity_comment_form_nojs_display() ?>>
 						

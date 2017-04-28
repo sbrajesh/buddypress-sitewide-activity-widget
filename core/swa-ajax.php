@@ -11,19 +11,19 @@ function swa_ajax_list_activity () {
 	
 	$max = isset( $_POST['max'] ) ? absint( $_POST['max'] ) : 200;
 
-	$show_avatar = isset( $_POST['show_avatar'] ) ? $_POST['show_avatar'] : 'yes';
-	$show_filters = isset( $_POST['show_filters'] ) ? $_POST['show_filters'] : 'yes';
+	$show_avatar = isset( $_POST['show_avatar'] ) ? $_POST['show_avatar'] : 1;
+	$show_filters = isset( $_POST['show_filters'] ) ? $_POST['show_filters'] : 1;
 	
-	$show_content = isset( $_POST['show_content'] ) ? $_POST['show_content'] : 'yes';
+	$show_content = isset( $_POST['show_content'] ) ? $_POST['show_content'] :1;
 	$activity_words_count = isset( $_POST['activity_words_count'] ) ? $_POST['activity_words_count']: 0;
 	
 	$included = isset( $_POST['included_components'] ) ? $_POST['included_components'] : false;
 	$excluded = isset( $_POST['excluded_components'] ) ? $_POST['excluded_components'] : false;
 
-	$is_personal = isset( $_POST['is_personal'] ) ? $_POST['is_personal'] : 'no';
-	$is_blog_admin_activity = isset( $_POST['is_blog_admin_activity'] ) ? $_POST['is_blog_admin_activity'] : 'no';
+	$is_personal = isset( $_POST['is_personal'] ) ? $_POST['is_personal'] : 0;
+	$is_blog_admin_activity = isset( $_POST['is_blog_admin_activity'] ) ? $_POST['is_blog_admin_activity'] : 0;
 
-	$show_post_form = isset( $_POST['show_post_form'] ) ? $_POST['show_post_form'] : 'no';
+	$show_post_form = isset( $_POST['show_post_form'] ) ? $_POST['show_post_form'] : 0;
 	//$show_filters=true,$included=false,$excluded=false
 	bp_swa_list_activities( array(
 		'per_page'					=> $per_page,
@@ -77,13 +77,18 @@ function swa_post_update () {
 		echo '-1<div id="message" class="error"><p>' . __( 'There was a problem posting your update, please try again.', 'buddypress-sitewide-activity-widget' ) . '</p></div>';
 		return false;
 	}
-	$show_avatar = isset( $_POST["show_avatar"] ) ? $_POST["show_avatar"] : "no";
-	$show_content = isset( $_POST["show_content"] ) ? $_POST["show_content"] : "no";
+	$show_avatar = isset( $_POST["show_avatar"] ) ? $_POST["show_avatar"] : 0;
+	$show_content = isset( $_POST["show_content"] ) ? $_POST["show_content"] : 0;
 	$activity_words_count = isset( $_POST['activity_words_count'] )? absint( $_POST['activity_words_count'] ) : 0;
 	if ( bp_has_activities( 'include=' . $activity_id ) ) :
 ?>
 		<?php while ( bp_activities() ) : bp_the_activity(); ?>
-			<?php swa_activity_entry( 'show_avatar=' . $show_avatar . '&show_activity_content=' . $show_content . '&activity_words_count='.$activity_words_count  ) ?>
+			<?php swa_activity_entry( array(
+			'show_avatar'           => $show_avatar,
+			'show_activity_content' => $show_content,
+			'activity_words_count'  => $activity_words_count,
+			'allow_comment'         => isset( $_POST['allow_comment'] ) ? absint( $_POST['allow_comment'] ) : 0,
+			)); ?>
 		<?php endwhile; ?>
 		<?php
 
