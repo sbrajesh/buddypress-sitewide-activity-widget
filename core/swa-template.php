@@ -188,7 +188,7 @@ function bp_swa_list_activities ( $args ) {
 		
 		<?php endif; ?>
 		<?php
-		
+
 			$params = array(
 				'type'			=> 'sitewide',
 				'max'			=> $args['max'],

@@ -55,19 +55,19 @@ class BP_SWA_Widget extends WP_Widget {
 		
 		echo $args['after_title'];
 
-		$args = $instance;
-		
-		$args['page']	= 1;
-		$args['scope']	= $scope;
-		$args['max']	= $instance['max_items'];
-		
-		$args['show_filters'] = $instance['show_activity_filters'];
-		
-		$args['included'] = $included_components;
-		$args['excluded'] = $excluded_components;
+		$activity_args = $instance;
+
+		$activity_args['page']	= 1;
+		$activity_args['scope']	= $scope;
+		$activity_args['max']	= $instance['max_items'];
+
+		$activity_args['show_filters'] = $instance['show_activity_filters'];
+
+		$activity_args['included'] = $included_components;
+		$activity_args['excluded'] = $excluded_components;
 		//is_personal, is_blog_admin activity etc are set in the  
 
-		bp_swa_list_activities( $args );
+		bp_swa_list_activities( $activity_args );
 		
 		?>
 		<input type='hidden' name='max' id='swa_max_items' value="<?php echo $instance['max_items']; ?>" />  
