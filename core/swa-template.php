@@ -257,6 +257,7 @@ function swa_activity_entry( $args ) {
     extract( $args );
 
 	$args['allow_comment'] = false;//we can provide an option in future to allow commenting
+	$args['show_activity_content'] = absint( $args['show_activity_content'] );
     ?>
  
     <?php do_action( 'bp_before_activity_entry' ) ?>
@@ -280,7 +281,7 @@ function swa_activity_entry( $args ) {
 				<?php bp_activity_action() ?>
 			</div>
 
-			<?php if ( bp_activity_has_content() && isset( $args['show_activity_content'] ) ) : ?>
+			<?php if ( bp_activity_has_content() && ! empty( $args['show_activity_content'] ) ) : ?>
 
 				<div class="swa-activity-inner">
 					<?php swa_activity_content_body( $args['activity_words_count'] ) ?>
@@ -310,9 +311,7 @@ function swa_activity_entry( $args ) {
 			</div>
 		
 		<?php endif; ?>
-		
-		<?php if ( bp_activity_can_comment() && isset( $args['show_activity_content'] ) ) :
-        
+		<?php if ( bp_activity_can_comment() &&  ! empty( $args['show_activity_content'] ) ) :
 			if ( ! $args['allow_comment'] ) {
 				//hide reply link
 				add_filter( 'bp_activity_can_comment_reply', '__return_false' );
