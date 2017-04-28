@@ -22,8 +22,8 @@ function swa_get_activity_filter_links ( $args = array() ) {
 	$link = '';
 	$defaults = array(
 		'style'     => 'list',
-        'before'    => '',
-        'after'     => '',
+        'before'    => '<li>',
+        'after'     => '</li>',
 	);
 	//check scope, if not single entry
 
