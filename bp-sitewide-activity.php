@@ -68,18 +68,18 @@ class SWA_Helper {
 	 */
 	private function setup() {
 
-		//set plugin path &url
+		// set plugin path &url.
 		$this->path = plugin_dir_path( __FILE__ );
 		$this->url  = plugin_dir_url( __FILE__ );
 
-		//load core files
+		// load core files.
 		add_action( 'bp_include', array( $this, 'load' ) );
 
-		//for enqueuing javascript
+		// for enqueuing javascript.
 		add_action( 'bp_enqueue_scripts', array( $this, 'load_js' ) );
-		//load css
+		// load css.
 		add_action( 'bp_enqueue_scripts', array( $this, 'load_css' ) );
-		//load admin css on widgets.php
+		// load admin css on widgets.php.
 		add_action( 'admin_print_styles-widgets.php', array( $this, 'load_admin_css' ) );
 
 		add_action( 'bp_init', array( $this, 'load_textdomain' ) );
@@ -103,6 +103,9 @@ class SWA_Helper {
 		}
 	}
 
+	/**
+	 * Load Js on front end
+	 */
 	public function load_js() {
 
 		if ( ! is_admin() ) {
@@ -110,6 +113,9 @@ class SWA_Helper {
 		}
 	}
 
+	/**
+	 * Load css
+	 */
 	public function load_css() {
 
 		if ( apply_filters( 'swa_load_css', true ) ) {
@@ -143,7 +149,7 @@ class SWA_Helper {
 	 *
 	 * @return array of user IDs
 	 */
-	public function get_admin_users_for_blog( $blog_id ) {
+	public static function get_admin_users_for_blog( $blog_id ) {
 
 		$users = get_users( array( 'role' => 'administrator', 'blog_id' => $blog_id, 'fields' => 'ID' ) );
 

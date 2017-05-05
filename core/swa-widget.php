@@ -134,14 +134,13 @@ class BP_SWA_Widget extends WP_Widget {
 			'is_blog_admin_activity'	=> 'no', 
 			'show_avatar'				=> 'yes', 
 			'show_activity_content'		=> 1,
-			'allow_comment'             => 1,
+			'allow_comment'             => 0,
 			'show_feed_link'			=> 'yes', 
 			'show_post_form'			=> 'no', 
 			'allow_reply'				=> 'no', 
 			'show_activity_filters'		=> 'yes', 
 			'included_components'		=> false, 
-			'excluded_components'		=> false, 
-			'allow_comment'				=> 'no',
+			'excluded_components'		=> false,
 			'activity_words_count'		=> 0,
 			
 			) );
@@ -155,12 +154,12 @@ class BP_SWA_Widget extends WP_Widget {
 		//extract( $instance );
 		?>
 
-		<div class="swa-widgte-block">
+		<div class="swa-widget-block">
 			<p><label for="bp-swa-title"><strong><?php _e( 'Title:', 'buddypress-sitewide-activity-widget' ); ?> </strong><input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" style="width: 100%" /></label></p>
-			<p><label for="bp-swa-per-page"><?php _e( 'Number of Items Per Page:', 'buddypress-sitewide-activity-widget' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'per_page' ); ?>" name="<?php echo $this->get_field_name( 'per_page' ); ?>" type="text" value="<?php echo esc_attr( $per_page ); ?>" style="width: 30%" /></label></p>
+			<p><label for="bp-swa-per-page"><?php _e( 'Number of items Per Page:', 'buddypress-sitewide-activity-widget' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'per_page' ); ?>" name="<?php echo $this->get_field_name( 'per_page' ); ?>" type="text" value="<?php echo esc_attr( $per_page ); ?>" style="width: 30%" /></label></p>
 			<p><label for="bp-swa-max"><?php _e( 'Max items to show:', 'buddypress-sitewide-activity-widget' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'max_items' ); ?>" name="<?php echo $this->get_field_name( 'max_items' ); ?>" type="text" value="<?php echo esc_attr( $max_items ); ?>" style="width: 30%" /></label></p>
 		</div>  
-		<div class="swa-widgte-block">
+		<div class="swa-widget-block">
 			<p>
 				<label for="bp-swa-is-personal"><strong><?php _e( "Limit to Logged In user's activity:", 'buddypress-sitewide-activity-widget' ); ?></strong>
 					<label for="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'is_personal' ); ?>_yes" name="<?php echo $this->get_field_name( 'is_personal' ); ?>" type="radio" <?php checked( $instance['is_personal'], 'yes' ) ?> value="yes" " />Yes</label>
@@ -175,7 +174,7 @@ class BP_SWA_Widget extends WP_Widget {
 				</label>
 			</p>
 		</div>
-		<div class="swa-widgte-block">
+		<div class="swa-widget-block">
 			<p>
 				<label for="bp-swa-show-avatar"><strong><?php _e( 'Show Avatar:', 'buddypress-sitewide-activity-widget' ); ?></strong>
 					<label for="<?php echo $this->get_field_id( 'show_avatar' ); ?>_yes" > <input id="<?php echo $this->get_field_id( 'show_avatar' ); ?>_yes" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" type="radio" <?php checked( $instance['show_avatar'], 'yes' ); ?> value="yes"  />Yes</label>
@@ -228,7 +227,7 @@ class BP_SWA_Widget extends WP_Widget {
 			</p>
 
 		</div>
-		<div class="swa-widgte-block">
+		<div class="swa-widget-block">
 			<p><label for="bp-swa-included-filters"><strong><?php _e( 'Include only following Filters:', 'buddypress-sitewide-activity-widget' ); ?></strong></label></p>
 			<p> 
 				<?php $recorded_components = swa_get_recorded_components();?>
@@ -237,7 +236,7 @@ class BP_SWA_Widget extends WP_Widget {
 				<?php endforeach; ?>
 			</p>
 		</div>
-		<div class="swa-widgte-block">
+		<div class="swa-widget-block">
 
 			<p><label for="bp-swa-included-filters"><strong><?php _e( 'Exclude following Components activity', 'buddypress-sitewide-activity-widget' ); ?></strong></label></p>
 			<p>
@@ -251,6 +250,9 @@ class BP_SWA_Widget extends WP_Widget {
 	}
 }//end of class
 
+/**
+ * Register the widget
+ */
 function swa_register_widget() {
 	register_widget( 'BP_SWA_Widget' );
 }
