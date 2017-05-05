@@ -97,7 +97,7 @@ ul.swa-activity-list li {
 	margin-left: 70px;
 	margin-bottom: 15px;
 	padding-left: 25px;
-	background: url( ../images/replyto_arrow.gif ) 7px 0 no-repeat;
+	/*background: url( ../images/replyto_arrow.gif ) 7px 0 no-repeat;*/
 }
 	.swa-activity-list li .swa-activity-inreplyto > p {
 		margin: 0;
@@ -321,7 +321,7 @@ div.swa-activity-comments ul, div.swa-activity-comments ul li {
 		}
 
 		div.swa-activity-comments form.loading {
-			background-image: url( ../images/ajax-loader.gif );
+			/*background-image: url( ../images/ajax-loader.gif );*/
 			background-position: 2% 95%;
 			background-repeat: no-repeat;
 		}

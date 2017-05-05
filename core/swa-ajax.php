@@ -24,6 +24,7 @@ function swa_ajax_list_activity() {
 	$is_blog_admin_activity = isset( $_POST['is_blog_admin_activity'] ) ? $_POST['is_blog_admin_activity'] : 0;
 
 	$show_post_form = isset( $_POST['show_post_form'] ) ? $_POST['show_post_form'] : 0;
+	$allow_comment = isset( $_POST['allow_comment'] ) ? absint( $_POST['allow_comment'] ) : 0;
 	//$show_filters=true,$included=false,$excluded=false
 	bp_swa_list_activities( array(
 		'per_page'               => $per_page,
@@ -38,7 +39,8 @@ function swa_ajax_list_activity() {
 		'is_blog_admin_activity' => $is_blog_admin_activity,
 		'show_activity_content'  => $show_content,
 		'activity_words_count'   => $activity_words_count,
-		'show_post_form'         => $show_post_form
+		'show_post_form'         => $show_post_form,
+		'allow_comment'          => $allow_comment,
 	) );
 
 	exit( 0 );

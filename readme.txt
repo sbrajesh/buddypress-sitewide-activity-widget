@@ -1,9 +1,9 @@
 === BuddyPress Sitewide Activity Widget ===
 Contributors: buddydev, sbrajesh
 Tags: buddypress, buddypress activity, sitewide activity, sitewide activity widget, buddypress sitewide activity widget
-Requires at least: BuddyPress 2.0
-Tested up to: BuddyPress 2.3.4
-Stable tag: 1.3.1
+Requires at least: 4.5
+Tested up to: 4.7.4
+Stable tag: 1.3.3
 
 BuddyPress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you.
 
@@ -41,12 +41,23 @@ Otherwise, Use the Plugin browser, upload it and activate, you are done.
 = How to Use =
 Add the widget "Site Wide Activity" and save the settings in the widget. That's it.
 = Component filters are not shown horizontal =
+It is most probably a css issue.For support, please use [BuddyDev Support Forum](https://buddydev.com/support/forums/ "BuddyDev support forums")
 
+= Comments Not working =
+It is an experimental feature. Make sure you have the 'show content' also set to yes. Otherwise the commenting wont' work.
 
-For support, please use [BuddyDev Support Forum](http://buddydev.com/support/forums/ "BuddyDev support forums")
+== Changelog ==
 
-== Changelog == 
- = Version 1.3.0 =
+ = Version 1.3.3 =
+ * Add option to turn on/off the comment display/reply.
+ * Code cleaning
+ * Compatibility with BuddyPress 2.8.2
+
+ = Version 1.3.2 =
+ * Add Translation support
+ * Code cleaning
+
+ = Version 1.3.1 =
  * Fix total count
  * Fix label for bbpress, It is now Forums
 

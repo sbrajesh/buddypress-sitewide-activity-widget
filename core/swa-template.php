@@ -123,7 +123,8 @@ function bp_swa_list_activities ( $args ) {
 		'excluded'					=> false,
 		'is_personal'				=> 'no',
 		'is_blog_admin_activity'	=> 'no',
-		'show_post_form'			=> 'no'
+		'show_post_form'			=> 'no',
+        'allow_comment'             => 0,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -254,7 +255,7 @@ function bp_swa_list_activities ( $args ) {
 function swa_activity_entry( $args ) {
 	
     $args = wp_parse_args( $args , array(
-            'allow_comment'=> true,
+            'allow_comment'=> false,
     ));
     extract( $args );
 

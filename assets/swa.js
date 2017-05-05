@@ -58,7 +58,8 @@ jQuery( document ).ready( function () {
 			excluded_components:	excluded_components,
 			show_post_form:			show_post_form,
 			original_scope:			jq( '#swa-original-scope' ).val(),
-			activity_words_count:	activity_words_count
+			activity_words_count:	activity_words_count,
+			allow_comment:			jq('#swa-activity-allow-comment').val()
 		},
 		
 		function ( response ) {
@@ -96,7 +97,7 @@ jQuery( document ).ready( function () {
 	} );
 
 
-	/*for oposting form*/
+	/*for posting form*/
 
 	/* New posts */
 	//copied from bp-default global.js
@@ -221,7 +222,8 @@ jQuery( document ).ready( function () {
 				form.addClass( 'root' );
 
 			form.slideDown( 200 );
-			jq.scrollTo( form, 500, { offset: -100, easing:'swing' } );
+			console.log(form);
+			//jq.scrollTo( form, 500, { offset: -100, easing:'swing' } );
 			jq( '#swa-ac-form-' + ids[2] + ' textarea' ).focus();
 
 			return false;
