@@ -435,3 +435,6 @@ div.swa-activity-comments ul, div.swa-activity-comments ul li {
 #swa-whats-new{width:98%;border:none;}
 #swa-whats-new-options {margin-top:5px;}
 #swa-whats-new-options select{margin-bottom:5px;}
+.swa-ac-form {
+	display:none;
+}
