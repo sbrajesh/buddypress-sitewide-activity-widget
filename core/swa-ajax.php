@@ -63,23 +63,14 @@ function swa_post_update() {
 		return false;
 	}
 
-	if ( empty( $_POST['content'] ) ) {
+	// if content is empty and it is not MediaPress update. Fail.
+	if ( empty( $_POST['content'] ) && empty( $_POST['mpp-attached-media'] ) ) {
 		echo '-1<div id="message" class="error"><p>' . __( 'Please enter some content to post.', 'buddypress-sitewide-activity-widget' ) . '</p></div>';
 
 		return false;
 	}
 
-	if ( empty( $_POST['object'] ) && function_exists( 'bp_activity_post_update' ) ) {
-		$activity_id = bp_activity_post_update( array( 'content' => $_POST['content'] ) );
-	} elseif ( $_POST['object'] == 'groups' ) {
-		if ( ! empty( $_POST['item_id'] ) && function_exists( 'groups_post_update' ) ) {
-			$activity_id = groups_post_update( array( 'content'  => $_POST['content'],
-			                                          'group_id' => $_POST['item_id']
-			) );
-		}
-	} else {
-		$activity_id = apply_filters( 'bp_activity_custom_update', $_POST['object'], $_POST['item_id'], $_POST['content'] );
-	}
+	$activity_id = swa_post_activity_update( $_POST );
 
 	if ( ! $activity_id ) {
 		echo '-1<div id="message" class="error"><p>' . __( 'There was a problem posting your update, please try again.', 'buddypress-sitewide-activity-widget' ) . '</p></div>';

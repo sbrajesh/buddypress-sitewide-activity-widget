@@ -98,3 +98,73 @@ function swa_activity_content_body( $word_count = 0 ) {
 
 	echo wpautop( $content );
 }
+
+/**
+ * Post an activity update.
+ *
+ * @param array $args post args.
+ *
+ * @return bool|int
+ */
+function swa_post_activity_update( $args ) {
+
+	$content = isset( $args['content'] ) ? trim( $args['content'] ) : '';
+
+	if ( empty( $content ) && ! empty( $args['mpp-attached-media'] ) ) {
+		return _swa_mpp_update_activity( $args );
+	} else {
+		return _swa_bp_update_activity( $args );
+	}
+
+}
+
+/**
+ * Post a BuddyPress activity.
+ *
+ * @param array $args args.
+ *
+ * @return bool|int
+ */
+function _swa_bp_update_activity( $args ) {
+	$activity_id = 0;
+	if ( empty( $args['object'] ) && function_exists( 'bp_activity_post_update' ) ) {
+		$activity_id = bp_activity_post_update( array( 'content' => $args['content'] ) );
+	} elseif ( 'groups' === $args['object'] ) {
+		if ( ! empty( $args['item_id'] ) && function_exists( 'groups_post_update' ) ) {
+			$activity_id = groups_post_update( array(
+				'content'  => $args['content'],
+				'group_id' => $args['item_id'],
+			) );
+		}
+	} else {
+		$activity_id = apply_filters( 'bp_activity_custom_update', $args['object'], $args['item_id'], $args['content'] );
+	}
+
+	return $activity_id;
+}
+
+/**
+ * Post update in case MediaPress is active and there are attached media with empty content.
+ *
+ * @param array $args args.
+ *
+ * @return bool|int
+ */
+function _swa_mpp_update_activity( $args = array() ) {
+	$activity_id = 0;
+	if ( empty( $args['object'] ) && function_exists( 'mpp_activity_post_update' ) ) {
+		$activity_id = mpp_activity_post_update( array( 'content' => $args['content'] ) );
+	} elseif ( 'groups' === $args['object'] ) {
+		if ( ! empty( $args['item_id'] ) && function_exists( 'mpp_activity_post_group_update' ) ) {
+			$activity_id = mpp_activity_post_group_update( array(
+				'content'  => $args['content'],
+				'group_id' => $args['item_id'],
+			) );
+		}
+	} else {
+		$activity_id = apply_filters( 'bp_activity_custom_update', $args['object'], $args['item_id'], $args['content'] );
+	}
+
+	return $activity_id;
+}
+
