@@ -25,6 +25,7 @@ function swa_ajax_list_activity() {
 
 	$show_post_form = isset( $_POST['show_post_form'] ) ? $_POST['show_post_form'] : 0;
 	$allow_comment = isset( $_POST['allow_comment'] ) ? absint( $_POST['allow_comment'] ) : 0;
+	$allow_delete = isset( $_POST['allow_delete'] ) ? absint( $_POST['allow_delete'] ) : 0;
 	//$show_filters=true,$included=false,$excluded=false
 	bp_swa_list_activities( array(
 		'per_page'               => $per_page,
@@ -41,6 +42,7 @@ function swa_ajax_list_activity() {
 		'activity_words_count'   => $activity_words_count,
 		'show_post_form'         => $show_post_form,
 		'allow_comment'          => $allow_comment,
+		'allow_delete'          => $allow_delete,
 	) );
 
 	exit( 0 );
@@ -88,6 +90,7 @@ function swa_post_update() {
 			'show_activity_content' => $show_content,
 			'activity_words_count'  => $activity_words_count,
 			'allow_comment'         => isset( $_POST['allow_comment'] ) ? absint( $_POST['allow_comment'] ) : 0,
+			'allow_delete'         => isset( $_POST['allow_delete'] ) ? absint( $_POST['allow_delete'] ) : 0,
 		) ); ?>
 	<?php endwhile; ?>
 		<?php

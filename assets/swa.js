@@ -59,7 +59,8 @@ jQuery( document ).ready( function () {
 			show_post_form:			show_post_form,
 			original_scope:			jq( '#swa-original-scope' ).val(),
 			activity_words_count:	activity_words_count,
-			allow_comment:			jq('#swa-activity-allow-comment').val()
+			allow_comment:			jq('#swa-activity-allow-comment').val(),
+			allow_delete:			jq('#swa-activity-allow-delete').val()
 		},
 		
 		function ( response ) {
@@ -142,7 +143,8 @@ jQuery( document ).ready( function () {
 			show_avatar:				show_avatar,
 			activity_words_count:		activity_words_count,
 			show_content:				jq('#swa_show_content').val(),
-			allow_comment:				jq('#swa-activity-allow-comment').val()
+			allow_comment:				jq('#swa-activity-allow-comment').val(),
+			allow_delete:				jq('#swa-activity-allow-delete').val()
 		},
 		function ( response )
 		{
@@ -293,8 +295,37 @@ jQuery( document ).ready( function () {
 
 			return false;
 		}
+        /* Delete activity stream items */
+        if ( target.hasClass('delete-activity') ) {
+            var li        = target.parents('ul.swa-activity-list li');
+            var id        = li.attr('id').substr( 9, li.attr('id').length );
+            var link_href = target.attr('href');
+            var nonce     = link_href.split('_wpnonce=');
+            var timestamp = li.prop( 'class' ).match( /date-recorded-([0-9]+)/ );
+           	nonce     = nonce[1];
 
-		/* Deleting an activity comment */
+            target.addClass('loading');
+
+            jq.post( ajaxurl, {
+                    action: 'delete_activity',
+                    'cookie': bp_get_cookies(),
+                    'id': id,
+                    '_wpnonce': nonce
+                },
+                function(response) {
+
+                    if ( response[0] + response[1] === '-1' ) {
+                        li.prepend( response.substr( 2, response.length ) );
+                        li.children('#message').hide().fadeIn(300);
+                    } else {
+                        li.slideUp(300);
+                    }
+                });
+
+            return false;
+        }
+
+        /* Deleting an activity comment */
 		if ( target.hasClass( 'acomment-delete' ) ) {
 			var link_href = target.attr( 'href' );
 			var comment_li = target.parent().parent();

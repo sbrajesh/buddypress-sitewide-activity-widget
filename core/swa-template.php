@@ -299,7 +299,9 @@ function swa_activity_entry( $args ) {
 				<?php if ( is_user_logged_in() && bp_activity_can_comment() && $args['allow_comment'] ) : ?>
 						<a href="<?php bp_activity_comment_link() ?>" class="acomment-reply" id="acomment-comment-<?php bp_activity_id() ?>"><?php _e( 'Reply', 'buddypress-sitewide-activity-widget' ) ?> (<span><?php bp_activity_comment_count() ?></span>)</a>
 				<?php endif; ?>
-
+                <?php if ( ! empty( $args['allow_delete'] ) ) : ?>
+				    <?php if ( bp_activity_user_can_delete() ) bp_activity_delete_link(); ?>
+                <?php endif;?>
 				<?php do_action( 'bp_activity_entry_meta' ) ?>
 			</div>
 			
