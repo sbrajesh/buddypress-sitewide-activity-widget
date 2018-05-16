@@ -2,10 +2,10 @@
 Contributors: buddydev, sbrajesh
 Tags: buddypress, buddypress activity, sitewide activity, sitewide activity widget, buddypress sitewide activity widget
 Requires at least: 4.5
-Tested up to: 4.7.4
-Stable tag: 1.3.3
+Tested up to: 4.9.5
+Stable tag: 1.3.4
 
-BuddyPress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you.
+BuddyPress Sitewide Activity Widget allows you to use BuddyPress Sitewide activity stream as a widget.
 
 == Description ==
 BuddyPress Sitewide Activity Widget brings back the BuddyPress Sitewide activity as a widget for you. Now you can show the BuddyPress activity in a widget area.
@@ -47,6 +47,10 @@ It is most probably a css issue.For support, please use [BuddyDev Support Forum]
 It is an experimental feature. Make sure you have the 'show content' also set to yes. Otherwise the commenting wont' work.
 
 == Changelog ==
+
+ = Version 1.3.3 =
+ * Add Compatibility with MediaPress 1.3.7+.
+ * Add option to allow delete from the list.
 
  = Version 1.3.3 =
  * Add option to turn on/off the comment display/reply.

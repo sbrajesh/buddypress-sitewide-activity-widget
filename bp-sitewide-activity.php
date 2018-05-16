@@ -3,7 +3,7 @@
 /**
  * Plugin Name: BuddyPress Sitewide Activity Widget
  * Plugin URI: https://buddydev.com/plugins/buddypress-sitewide-activity-widget/
- * Version: 1.3.3
+ * Version: 1.3.4
  * Author: BuddyDev
  * Author URI: https://buddydev.com
  * Description: Power packed, customizable Sitewide activity widget for BuddyPress.
@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Loads the assets and does basic duties
  *
  * @since v1.1.4
- *
  */
 class SWA_Helper {
 
@@ -87,7 +86,6 @@ class SWA_Helper {
 
 	/**
 	 * Load SWA core files
-	 *
 	 */
 	public function load() {
 
@@ -126,7 +124,6 @@ class SWA_Helper {
 
 	/**
 	 * Load admin style on widgets page
-	 *
 	 */
 	public function load_admin_css() {
 
@@ -136,7 +133,6 @@ class SWA_Helper {
 
 	/**
 	 * Load text domain
-	 *
 	 */
 	public function load_textdomain() {
 		load_plugin_textdomain( 'swa', false, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -178,6 +174,7 @@ class SWA_Helper {
 SWA_Helper::get_instance();
 
 /**
+ * Shortcut to swa_helper.
  *
  * @return SWA_Helper
  */
