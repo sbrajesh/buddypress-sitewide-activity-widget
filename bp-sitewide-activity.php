@@ -3,7 +3,7 @@
 /**
  * Plugin Name: BuddyPress Sitewide Activity Widget
  * Plugin URI: https://buddydev.com/plugins/buddypress-sitewide-activity-widget/
- * Version: 1.3.4
+ * Version: 1.3.5
  * Author: BuddyDev
  * Author URI: https://buddydev.com
  * Description: Power packed, customizable Sitewide activity widget for BuddyPress.
